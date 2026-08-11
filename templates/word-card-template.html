@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>每日英语单词卡片</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: #f5f5f5;
+    padding: 20px;
+  }
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  /* ===== 表头 ===== */
+  .header {
+    background: #fff;
+    border: 2px solid #FFB6C1;
+    border-radius: 8px;
+    padding: 16px 24px;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+  .header h1 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0;
+  }
+
+  /* ===== 单词卡片 ===== */
+  .card {
+    background: #fff;
+    border: 0.5px solid #e5e5e5;
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+  }
+  .card-header {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .card-number {
+    font-size: 14px;
+    color: #999;
+    font-weight: 400;
+  }
+  .card-word {
+    font-size: 20px;
+    font-weight: 700;
+    color: #2563eb;
+  }
+  .card-phonetic {
+    font-size: 14px;
+    color: #999;
+  }
+  .card-pos {
+    display: inline-block;
+    background: #2563eb;
+    color: #fff;
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-left: 4px;
+  }
+  .card-meaning {
+    font-size: 15px;
+    font-weight: 500;
+    color: #333;
+    margin: 6px 0 12px;
+  }
+  .card-example {
+    border-left: 2px solid #B5D4F4;
+    padding-left: 10px;
+    margin-bottom: 6px;
+  }
+  .card-example-en {
+    font-size: 14px;
+    color: #333;
+    line-height: 1.6;
+  }
+  .card-example-en strong {
+    color: #2563eb;
+    font-weight: 600;
+  }
+  .card-example-cn {
+    font-size: 13px;
+    color: #999;
+    margin-top: 4px;
+  }
+  .card-memory {
+    background: #FAEEDA;
+    border-radius: 6px;
+    padding: 10px 12px;
+    font-size: 13px;
+    color: #666;
+    line-height: 1.6;
+    margin-top: 12px;
+  }
+  .card-memory .label {
+    color: #e67e22;
+    font-weight: 600;
+  }
+  .card-memory .collocation {
+    color: #8B4513;
+    font-weight: 500;
+    margin-top: 4px;
+  }
+
+  /* ===== 汇总表格 ===== */
+  .summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 14px;
+  }
+  .summary-table th {
+    background: #f8f9fa;
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 12px;
+    border: 0.5px solid #e5e5e5;
+  }
+  .summary-table td {
+    padding: 8px 12px;
+    border: 0.5px solid #e5e5e5;
+    color: #333;
+  }
+  .summary-table tbody tr:nth-child(even) td {
+    background: #f8f9fa;
+  }
+
+  /* ===== 底部总结 ===== */
+  .summary-text {
+    margin-top: 16px;
+    font-size: 14px;
+    color: #666;
+    line-height: 1.8;
+    padding: 12px 16px;
+    background: #fff;
+    border-radius: 8px;
+    border: 0.5px solid #e5e5e5;
+  }
+
+  /* ===== 复习页（新轮第一天用） ===== */
+  .review-block {
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 16px;
+  }
+  .review-header {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 10px;
+  }
+  .review-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+  }
+  .review-table th {
+    background: #f8f9fa;
+    font-weight: 500;
+    text-align: left;
+    padding: 6px 8px;
+    border: 0.5px solid #e5e5e5;
+  }
+  .review-table td {
+    padding: 5px 8px;
+    border: 0.5px solid #e5e5e5;
+    color: #666;
+  }
+  .review-table tbody tr:nth-child(even) td {
+    background: #f8f9fa;
+  }
+  .review-footer {
+    margin-top: 10px;
+    font-size: 12.5px;
+    color: #999;
+    font-style: italic;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ===== 表头（每次必输出） ===== -->
+  <div class="header">
+    <h1>M.DD 英语单词卡片 - [主题名称]主题</h1>
+  </div>
+
+  <!-- ===== 复习页（仅新轮第一天输出，平时删除此区块） ===== -->
+  <!--
+  <div class="review-block">
+    <div class="review-header">📊 Round N-1 · 上轮单词一览 · [起始日期] → [结束日期]</div>
+    <table class="review-table">
+      <thead>
+        <tr><th>执行日</th><th>日期</th><th>单词组</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Day N-4</td><td>MM-DD</td><td>word1 · word2 · word3 · word4 · word5</td></tr>
+        <tr><td>Day N-3</td><td>MM-DD</td><td>word1 · word2 · word3 · word4 · word5</td></tr>
+        <tr><td>Day N-2</td><td>MM-DD</td><td>word1 · word2 · word3 · word4 · word5</td></tr>
+        <tr><td>Day N-1</td><td>MM-DD</td><td>word1 · word2 · word3 · word4 · word5</td></tr>
+        <tr><td>Day N</td><td>MM-DD</td><td>word1 · word2 · word3 · word4 · word5</td></tr>
+      </tbody>
+    </table>
+    <div class="review-footer">💡 本轮共覆盖：[主题名称]。记得先复习上轮，再学新词！</div>
+  </div>
+  -->
+
+  <!-- ===== 单词卡片 1 ===== -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-number">1.</span>
+      <span class="card-word">word</span>
+      <span class="card-phonetic">/wɜːrd/</span>
+      <span class="card-pos">n.</span>
+    </div>
+    <div class="card-meaning">中文词义</div>
+    <div class="card-example">
+      <div class="card-example-en">This is an example sentence with <strong>word</strong> in it.</div>
+      <div class="card-example-cn">这是一个包含该单词的例句翻译。</div>
+    </div>
+    <div class="card-memory">
+      <span class="label">💡 记忆：</span>词根拆解或联想记忆内容。
+      <div class="collocation">📚 搭配：collocation 1 / collocation 2 / collocation 3</div>
+    </div>
+  </div>
+
+  <!-- ===== 单词卡片 2-5（复制上方结构） ===== -->
+  <!-- ... -->
+
+  <!-- ===== 汇总表格 ===== -->
+  <table class="summary-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>单词</th>
+        <th>词义（核心）</th>
+        <th>核心用法</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>word</td><td>中文词义</td><td>核心用法示例</td></tr>
+      <!-- ... 共5行 ... -->
+    </tbody>
+  </table>
+
+  <!-- ===== 底部总结 ===== -->
+  <div class="summary-text">
+    今日 5 个词的主题联系总结，帮助用户形成记忆组块。
+  </div>
+
+</div>
+</body>
+</html>

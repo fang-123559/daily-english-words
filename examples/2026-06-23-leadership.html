@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>6.23 英语单词卡片 - 领导力主题</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: #f5f5f5;
+    padding: 20px;
+  }
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  /* ===== 表头 ===== */
+  .header {
+    background: #fff;
+    border: 2px solid #FFB6C1;
+    border-radius: 8px;
+    padding: 16px 24px;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+  .header h1 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0;
+  }
+
+  /* ===== 复习页 ===== */
+  .review-block {
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 16px;
+  }
+  .review-header {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 10px;
+  }
+  .review-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+  }
+  .review-table th {
+    background: #f8f9fa;
+    font-weight: 500;
+    text-align: left;
+    padding: 6px 8px;
+    border: 0.5px solid #e5e5e5;
+  }
+  .review-table td {
+    padding: 5px 8px;
+    border: 0.5px solid #e5e5e5;
+    color: #666;
+  }
+  .review-table tbody tr:nth-child(even) td {
+    background: #f8f9fa;
+  }
+  .review-footer {
+    margin-top: 10px;
+    font-size: 12.5px;
+    color: #999;
+    font-style: italic;
+  }
+
+  /* ===== 单词卡片 ===== */
+  .card {
+    background: #fff;
+    border: 0.5px solid #e5e5e5;
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+  }
+  .card-header {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .card-number {
+    font-size: 14px;
+    color: #999;
+    font-weight: 400;
+  }
+  .card-word {
+    font-size: 20px;
+    font-weight: 700;
+    color: #2563eb;
+  }
+  .card-phonetic {
+    font-size: 14px;
+    color: #999;
+  }
+  .card-pos {
+    display: inline-block;
+    background: #2563eb;
+    color: #fff;
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-left: 4px;
+  }
+  .card-meaning {
+    font-size: 15px;
+    font-weight: 500;
+    color: #333;
+    margin: 6px 0 12px;
+  }
+  .card-example {
+    border-left: 2px solid #B5D4F4;
+    padding-left: 10px;
+    margin-bottom: 6px;
+  }
+  .card-example-en {
+    font-size: 14px;
+    color: #333;
+    line-height: 1.6;
+  }
+  .card-example-en strong {
+    color: #2563eb;
+    font-weight: 600;
+  }
+  .card-example-cn {
+    font-size: 13px;
+    color: #999;
+    margin-top: 4px;
+  }
+  .card-memory {
+    background: #FAEEDA;
+    border-radius: 6px;
+    padding: 10px 12px;
+    font-size: 13px;
+    color: #666;
+    line-height: 1.6;
+    margin-top: 12px;
+  }
+  .card-memory .label {
+    color: #e67e22;
+    font-weight: 600;
+  }
+  .card-memory .collocation {
+    color: #8B4513;
+    font-weight: 500;
+    margin-top: 4px;
+  }
+
+  /* ===== 汇总表格 ===== */
+  .summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 14px;
+  }
+  .summary-table th {
+    background: #f8f9fa;
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 12px;
+    border: 0.5px solid #e5e5e5;
+  }
+  .summary-table td {
+    padding: 8px 12px;
+    border: 0.5px solid #e5e5e5;
+    color: #333;
+  }
+  .summary-table tbody tr:nth-child(even) td {
+    background: #f8f9fa;
+  }
+
+  /* ===== 底部总结 ===== */
+  .summary-text {
+    margin-top: 16px;
+    font-size: 14px;
+    color: #666;
+    line-height: 1.8;
+    padding: 12px 16px;
+    background: #fff;
+    border-radius: 8px;
+    border: 0.5px solid #e5e5e5;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ===== 表头 ===== -->
+  <div class="header">
+    <h1>6.23 英语单词卡片 - 领导力主题</h1>
+  </div>
+
+  <!-- ===== 复习页（Round 8 → 9 新轮首日） ===== -->
+  <div class="review-block">
+    <div class="review-header">📊 Round 8 · 上轮单词一览 · 06-18 → 06-22</div>
+    <table class="review-table">
+      <thead>
+        <tr><th>执行日</th><th>日期</th><th>单词组</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Day 41</td><td>06-18</td><td>articulate · eloquent · persuasive · transparent · diplomatic</td></tr>
+        <tr><td>Day 43</td><td>06-20</td><td>quality · standard · defect · specification · certification</td></tr>
+        <tr><td>Day 45</td><td>06-22</td><td>teamwork · synergy · cohesion · morale · trust</td></tr>
+      </tbody>
+    </table>
+    <div class="review-footer">💡 本轮共覆盖：沟通表达 → 质量管理 → 团队建设。涵盖职场核心技能链：说得好→做得精→团队强。记得先复习上轮，再学新词！</div>
+  </div>
+
+  <!-- ===== 单词卡片 1: inspire ===== -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-number">1.</span>
+      <span class="card-word">inspire</span>
+      <span class="card-phonetic">/ɪnˈspaɪər/</span>
+      <span class="card-pos">v.</span>
+    </div>
+    <div class="card-meaning">激励；鼓舞；赋予灵感</div>
+    <div class="card-example">
+      <div class="card-example-en">A great leader must be able to <strong>inspire</strong> their team to achieve more than they thought possible.</div>
+      <div class="card-example-cn">优秀的领导者必须能够激励团队超越自我认知的极限。</div>
+    </div>
+    <div class="card-memory">
+      <span class="label">💡 记忆：</span>in-（进入）+ spire（呼吸）= 向内心注入气息，引申为"注入精神力量"。同源词：spirit（精神）。
+      <div class="collocation">📚 搭配：inspire someone to do / be inspired by / inspire confidence</div>
+    </div>
+  </div>
+
+  <!-- ===== 单词卡片 2: empower ===== -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-number">2.</span>
+      <span class="card-word">empower</span>
+      <span class="card-phonetic">/ɪmˈpaʊər/</span>
+      <span class="card-pos">v.</span>
+    </div>
+    <div class="card-meaning">赋权；授权；使能够</div>
+    <div class="card-example">
+      <div class="card-example-en">The new policy aims to <strong>empower</strong> employees to make their own decisions at the frontline.</div>
+      <div class="card-example-cn">新政策旨在赋予前线员工自主决策的权力。</div>
+    </div>
+    <div class="card-memory">
+      <span class="label">💡 记忆：</span>em-（使）+ power（权力）= 赋予权力。与 delegate 不同，empower 更强调"赋能"——不仅给权，还给能力。
+      <div class="collocation">📚 搭配：empower employees / empower someone to do / feel empowered</div>
+    </div>
+  </div>
+
+  <!-- ===== 单词卡片 3: mentor ===== -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-number">3.</span>
+      <span class="card-word">mentor</span>
+      <span class="card-phonetic">/ˈmentɔːr/</span>
+      <span class="card-pos">n./v.</span>
+    </div>
+    <div class="card-meaning">导师；指导（v. 指导培养）</div>
+    <div class="card-example">
+      <div class="card-example-en">She was lucky to have an experienced senior colleague to <strong>mentor</strong> her during her first year.</div>
+      <div class="card-example-cn">她非常幸运有一位经验丰富的前辈在第一年指导她。</div>
+    </div>
+    <div class="card-memory">
+      <span class="label">💡 记忆：</span>来自希腊神话中的 Mentor（门特），奥德修斯的挚友，辅佐其子特勒马科斯。现代含义"导师"由此而来——既教技能，也教做人。
+      <div class="collocation">📚 搭配：mentor program / act as a mentor / mentor junior staff</div>
+    </div>
+  </div>
+
+  <!-- ===== 单词卡片 4: motivate ===== -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-number">4.</span>
+      <span class="card-word">motivate</span>
+      <span class="card-phonetic">/ˈmoʊtɪveɪt/</span>
+      <span class="card-pos">v.</span>
+    </div>
+    <div class="card-meaning">激励；激发（动机）</div>
+    <div class="card-example">
+      <div class="card-example-en">Bonuses alone are not enough to <strong>motivate</strong> top performers in the long run.</div>
+      <div class="card-example-cn">仅靠奖金不足以长期激励优秀员工。</div>
+    </div>
+    <div class="card-memory">
+      <span class="label">💡 记忆：</span>motive（动机）+ -ate（使）= 激发动机。词根 mot- 表"移动"，动机（motive）就是"推动你行动的东西"。同源词：motion（运动）、motor（马达）。
+      <div class="collocation">📚 搭配：motivate the team / highly motivated / motivate someone to do</div>
+    </div>
+  </div>
+
+  <!-- ===== 单词卡片 5: vision ===== -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-number">5.</span>
+      <span class="card-word">vision</span>
+      <span class="card-phonetic">/ˈvɪʒən/</span>
+      <span class="card-pos">n.</span>
+    </div>
+    <div class="card-meaning">愿景；远见；视野</div>
+    <div class="card-example">
+      <div class="card-example-en">A successful CEO must communicate a clear <strong>vision</strong> that everyone in the company can believe in.</div>
+      <div class="card-example-cn">成功的 CEO 必须传达出全公司都能信服的清晰愿景。</div>
+    </div>
+    <div class="card-memory">
+      <span class="label">💡 记忆：</span>vis-（看）+ -ion（名词后缀）= 看到的景象。vision 不仅仅是"视力"，更是"看别人看不到的远方"——前瞻性。同源词：visible（可见的）、visual（视觉的）。
+      <div class="collocation">📚 搭配：share a vision / strategic vision / people with vision</div>
+    </div>
+  </div>
+
+  <!-- ===== 汇总表格 ===== -->
+  <table class="summary-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>单词</th>
+        <th>词义（核心）</th>
+        <th>核心用法</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>inspire</td><td>激励；鼓舞</td><td>inspire someone to do / be inspired by</td></tr>
+      <tr><td>2</td><td>empower</td><td>赋权；授权</td><td>empower employees / empower someone to do</td></tr>
+      <tr><td>3</td><td>mentor</td><td>导师；指导</td><td>mentor program / act as a mentor</td></tr>
+      <tr><td>4</td><td>motivate</td><td>激励；激发</td><td>motivate the team / highly motivated</td></tr>
+      <tr><td>5</td><td>vision</td><td>愿景；远见</td><td>share a vision / strategic vision</td></tr>
+    </tbody>
+  </table>
+
+  <!-- ===== 底部总结 ===== -->
+  <div class="summary-text">
+    今日 5 个词构成了领导力的核心要素链：<strong>vision</strong>（愿景方向）→ <strong>inspire</strong>（精神感召）→ <strong>motivate</strong>（激发动力）→ <strong>empower</strong>（赋能放权）→ <strong>mentor</strong>（传承培养）。从"画饼"到"烤饼"到"分饼"到"教人做饼"，这是一套完整的领导力实践路线。
+  </div>
+
+</div>
+</body>
+</html>
