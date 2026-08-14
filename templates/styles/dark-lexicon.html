@@ -1,0 +1,341 @@
+<!--
+  每日英语单词卡片 · 风格模板
+  用法：保留本文件的 <style> 与整体结构，把示例内容替换为当日单词数据。
+  卡片数量按当日单词数（默认 5 张）增减；日期、主题名、串记总结按实际填写。
+-->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily Lexicon · 职场高效沟通</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #0D1321;
+    --bg-raise: #121829;
+    --rule: #2A3350;
+    --ink: #F2F0E9;
+    --dim: #C6CDDC;
+    --faint: #97A0B4;
+    --gold: #E7BE6B;
+    --gold-dim: #9C8350;
+  }
+  body {
+    font-family: "Inter", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -10%, #1B2440 0%, transparent 60%);
+    color: var(--dim);
+    padding: 56px 20px 64px;
+  }
+  .lexicon { max-width: 680px; margin: 0 auto; }
+
+  /* ===== 卷首 ===== */
+  .frontispiece { text-align: center; margin-bottom: 56px; }
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .42em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .frontispiece h1 {
+    font-family: "Playfair Display", Georgia, "Songti SC", serif;
+    font-size: 38px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.25;
+    letter-spacing: .01em;
+  }
+  .frontispiece .theme-cn {
+    margin-top: 12px;
+    font-size: 15px;
+    color: var(--dim);
+    letter-spacing: .35em;
+    text-indent: .35em;
+  }
+  .rule-ornament {
+    margin: 26px auto 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    color: var(--gold-dim);
+    font-size: 12px;
+  }
+  .rule-ornament::before,
+  .rule-ornament::after {
+    content: "";
+    width: 72px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold-dim));
+  }
+  .rule-ornament::after {
+    background: linear-gradient(to left, transparent, var(--gold-dim));
+  }
+  .date-line {
+    margin-top: 14px;
+    font-size: 12px;
+    letter-spacing: .3em;
+    color: var(--faint);
+  }
+
+  /* ===== 词条 ===== */
+  .entry {
+    position: relative;
+    padding: 34px 8px 30px 88px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .entry:last-of-type { border-bottom: none; }
+  .entry-ghost {
+    position: absolute;
+    left: 0; top: 20px;
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 64px;
+    font-weight: 700;
+    color: transparent;
+    -webkit-text-stroke: 1px #2A3450;
+    line-height: 1;
+    user-select: none;
+  }
+  .entry-head {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .entry-word {
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 30px;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: .01em;
+  }
+  .entry-phonetic {
+    font-family: "Playfair Display", Georgia, serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--faint);
+  }
+  .entry-pos {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .18em;
+    color: var(--gold);
+    border: 1px solid var(--gold-dim);
+    border-radius: 3px;
+    padding: 3px 8px 2px;
+    text-transform: uppercase;
+  }
+  .entry-meaning {
+    margin: 10px 0 16px;
+    font-size: 15.5px;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: .04em;
+  }
+  .entry-example {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--dim);
+  }
+  .entry-example em {
+    font-style: normal;
+    color: var(--gold);
+    border-bottom: 1px solid var(--gold-dim);
+    padding-bottom: 1px;
+  }
+  .entry-example-cn {
+    font-size: 12.5px;
+    color: var(--faint);
+    margin-top: 4px;
+  }
+  .entry-memory {
+    margin-top: 14px;
+    padding-left: 14px;
+    border-left: 1px solid var(--gold-dim);
+    font-size: 12.5px;
+    line-height: 1.8;
+    color: var(--faint);
+  }
+  .entry-memory .k {
+    color: var(--gold);
+    letter-spacing: .12em;
+    font-size: 10.5px;
+    font-weight: 600;
+  }
+  .entry-memory .colloc { color: var(--dim); }
+
+  /* ===== 卷尾 ===== */
+  .colophon { margin-top: 56px; text-align: center; }
+  .colophon-rule {
+    width: 160px;
+    height: 1px;
+    margin: 0 auto 28px;
+    background: linear-gradient(to right, transparent, var(--gold-dim), transparent);
+  }
+  .colophon-title {
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: .4em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .colophon-words {
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 16px;
+    color: var(--dim);
+    letter-spacing: .06em;
+    word-spacing: .4em;
+  }
+  .colophon-note {
+    margin: 22px auto 0;
+    max-width: 480px;
+    font-size: 13px;
+    line-height: 2.1;
+    color: var(--faint);
+  }
+  .colophon-note em {
+    font-style: normal;
+    color: var(--gold);
+  }
+</style>
+</head>
+<body>
+<div class="lexicon">
+
+  <header class="frontispiece">
+    <div class="eyebrow">Daily Lexicon · No. 47</div>
+    <h1>The Art of Clear Communication</h1>
+    <div class="theme-cn">职 场 高 效 沟 通</div>
+    <div class="rule-ornament">✦</div>
+    <div class="date-line">VIII · XII · MMXXVI — SIX WORDS</div>
+  </header>
+
+  <section class="entry">
+    <div class="entry-ghost">01</div>
+    <div class="entry-head">
+      <span class="entry-word">concise</span>
+      <span class="entry-phonetic">/kənˈsaɪs/</span>
+      <span class="entry-pos">adj</span>
+    </div>
+    <div class="entry-meaning">简洁的，简明的</div>
+    <div class="entry-example">
+      Please keep your report <em>concise</em> and to the point.
+      <div class="entry-example-cn">请保持报告简洁，切中要点。</div>
+    </div>
+    <div class="entry-memory">
+      <span class="k">记忆</span> · con-（一起）+ -cise（切）→ 把多余的部分一起切掉
+      <br><span class="k">搭配</span> · <span class="colloc">concise summary · concise explanation · be concise and clear</span>
+    </div>
+  </section>
+
+  <section class="entry">
+    <div class="entry-ghost">02</div>
+    <div class="entry-head">
+      <span class="entry-word">clarify</span>
+      <span class="entry-phonetic">/ˈklærəfaɪ/</span>
+      <span class="entry-pos">v</span>
+    </div>
+    <div class="entry-meaning">澄清，阐明</div>
+    <div class="entry-example">
+      Could you <em>clarify</em> the deadline for this project?
+      <div class="entry-example-cn">你能澄清一下这个项目的截止日期吗？</div>
+    </div>
+    <div class="entry-memory">
+      <span class="k">记忆</span> · clar-（清楚）+ -ify（使…）→ 使变清楚
+      <br><span class="k">搭配</span> · <span class="colloc">clarify the issue · clarify one's position · clarify the requirements</span>
+    </div>
+  </section>
+
+  <section class="entry">
+    <div class="entry-ghost">03</div>
+    <div class="entry-head">
+      <span class="entry-word">articulate</span>
+      <span class="entry-phonetic">/ɑːrˈtɪkjuleɪt/</span>
+      <span class="entry-pos">v</span>
+    </div>
+    <div class="entry-meaning">清晰地表达；口齿清晰的</div>
+    <div class="entry-example">
+      She <em>articulated</em> her concerns clearly in the meeting.
+      <div class="entry-example-cn">她在会议上清晰地表达了自己的顾虑。</div>
+    </div>
+    <div class="entry-memory">
+      <span class="k">记忆</span> · articul-（关节）→ 像关节一样节节分明 → 表达清晰
+      <br><span class="k">搭配</span> · <span class="colloc">articulate your ideas · articulate a vision · be highly articulate</span>
+    </div>
+  </section>
+
+  <section class="entry">
+    <div class="entry-ghost">04</div>
+    <div class="entry-head">
+      <span class="entry-word">feedback</span>
+      <span class="entry-phonetic">/ˈfiːdbæk/</span>
+      <span class="entry-pos">n</span>
+    </div>
+    <div class="entry-meaning">反馈，反馈意见</div>
+    <div class="entry-example">
+      We welcome your <em>feedback</em> on the new proposal.
+      <div class="entry-example-cn">我们欢迎你对新提案的反馈。</div>
+    </div>
+    <div class="entry-memory">
+      <span class="k">记忆</span> · feed（喂）+ back（回）→ 喂回来的信息
+      <br><span class="k">搭配</span> · <span class="colloc">give feedback · constructive feedback · feedback loop</span>
+    </div>
+  </section>
+
+  <section class="entry">
+    <div class="entry-ghost">05</div>
+    <div class="entry-head">
+      <span class="entry-word">align</span>
+      <span class="entry-phonetic">/əˈlaɪn/</span>
+      <span class="entry-pos">v</span>
+    </div>
+    <div class="entry-meaning">对齐，使一致</div>
+    <div class="entry-example">
+      Let's <em>align</em> our goals before the meeting.
+      <div class="entry-example-cn">我们在会议前先对齐目标。</div>
+    </div>
+    <div class="entry-memory">
+      <span class="k">记忆</span> · a-（向）+ lign（线）→ 使成一条线
+      <br><span class="k">搭配</span> · <span class="colloc">align with · align priorities · align the team</span>
+    </div>
+  </section>
+
+  <section class="entry">
+    <div class="entry-ghost">06</div>
+    <div class="entry-head">
+      <span class="entry-word">follow up</span>
+      <span class="entry-phonetic">/ˈfɒloʊ ʌp/</span>
+      <span class="entry-pos">phr. v</span>
+    </div>
+    <div class="entry-meaning">跟进，追踪</div>
+    <div class="entry-example">
+      I'll <em>follow up</em> with the client tomorrow.
+      <div class="entry-example-cn">我明天会跟进客户。</div>
+    </div>
+    <div class="entry-memory">
+      <span class="k">记忆</span> · follow（跟随）+ up（向上）→ 跟着事情往上走
+      <br><span class="k">搭配</span> · <span class="colloc">follow up on · follow-up email · follow up regularly</span>
+    </div>
+  </section>
+
+  <footer class="colophon">
+    <div class="colophon-rule"></div>
+    <div class="colophon-title">今日六词 · 一串记住</div>
+    <div class="colophon-words">concise · clarify · articulate · feedback · align · follow up</div>
+    <p class="colophon-note">
+      表达要 <em>concise</em>，疑问主动 <em>clarify</em>，观点 <em>articulate</em> 清楚，
+      再收 <em>feedback</em>、与团队 <em>align</em>，最后 <em>follow up</em> 到底。
+      一次沟通，完整闭环。
+    </p>
+  </footer>
+
+</div>
+</body>
+</html>

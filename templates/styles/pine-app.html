@@ -1,0 +1,265 @@
+<!--
+  每日英语单词卡片 · 风格模板
+  用法：保留本文件的 <style> 与整体结构，把示例内容替换为当日单词数据。
+  卡片数量按当日单词数（默认 5 张）增减；日期、主题名、串记总结按实际填写。
+-->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>今日单词 · 职场高效沟通</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Noto+Serif+SC:wght@600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --pine: #10312A;
+    --pine-2: #16453B;
+    --cream: #F7F2E7;
+    --cream-note: #EDE5D2;
+    --ink: #1D2420;
+    --soft: #6A7168;
+    --amber: #D98E2B;
+    --line: rgba(247,242,231,.14);
+  }
+  body {
+    font-family: "Sora", "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: linear-gradient(165deg, var(--pine) 0%, var(--pine-2) 55%, var(--pine) 100%);
+    min-height: 100vh;
+    padding: 44px 16px 56px;
+    color: var(--ink);
+  }
+  .phone { max-width: 420px; margin: 0 auto; }
+
+  /* ===== 头部 ===== */
+  .hero { margin-bottom: 26px; padding: 0 6px; }
+  .hero .date {
+    font-size: 11px;
+    letter-spacing: .32em;
+    color: rgba(247,242,231,.55);
+    text-transform: uppercase;
+  }
+  .hero h1 {
+    margin-top: 12px;
+    font-size: 34px;
+    font-weight: 800;
+    color: var(--cream);
+    letter-spacing: .01em;
+  }
+  .hero .theme {
+    margin-top: 10px;
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--amber);
+    border: 1px solid rgba(217,142,43,.45);
+    border-radius: 999px;
+    padding: 5px 14px;
+  }
+  .hero .progress {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero .track {
+    flex: 1;
+    height: 3px;
+    border-radius: 999px;
+    background: var(--line);
+    overflow: hidden;
+  }
+  .hero .track i {
+    display: block;
+    height: 100%;
+    width: 60%;
+    background: var(--amber);
+    border-radius: 999px;
+  }
+  .hero .plabel {
+    font-size: 11px;
+    color: rgba(247,242,231,.55);
+    white-space: nowrap;
+  }
+
+  /* ===== 单词卡 ===== */
+  .card {
+    background: var(--cream);
+    border-radius: 20px;
+    padding: 22px 24px 18px;
+    margin-bottom: 14px;
+    box-shadow: 0 10px 28px rgba(6,20,16,.35);
+  }
+  .card-top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .card-no {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .18em;
+    color: var(--amber);
+  }
+  .card-word {
+    font-size: 27px;
+    font-weight: 800;
+    letter-spacing: -.01em;
+    flex: 1;
+  }
+  .card-pos {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    color: var(--soft);
+  }
+  .card-phon {
+    margin-top: 3px;
+    font-size: 12.5px;
+    color: var(--soft);
+  }
+  .card-meaning {
+    margin-top: 8px;
+    font-size: 15.5px;
+    font-weight: 700;
+  }
+  .card-ex {
+    margin-top: 10px;
+    font-size: 13.5px;
+    line-height: 1.75;
+    color: #3A423B;
+  }
+  .card-ex b { color: var(--amber); font-weight: 700; }
+  .card-ex-cn { font-size: 12.5px; color: var(--soft); margin-top: 2px; }
+  .card-note {
+    margin-top: 12px;
+    background: var(--cream-note);
+    border-radius: 12px;
+    padding: 10px 14px;
+    font-size: 12px;
+    line-height: 1.9;
+    color: var(--soft);
+  }
+  .card-note b { color: var(--ink); font-weight: 700; }
+
+  /* ===== 底部串记 ===== */
+  .foot {
+    margin-top: 26px;
+    padding: 22px 6px 0;
+    border-top: 1px solid var(--line);
+  }
+  .foot .lbl {
+    font-size: 10.5px;
+    letter-spacing: .32em;
+    color: rgba(247,242,231,.55);
+    margin-bottom: 12px;
+  }
+  .foot p {
+    font-size: 13px;
+    line-height: 2.2;
+    color: rgba(247,242,231,.8);
+  }
+  .foot b { color: var(--amber); font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="phone">
+
+  <div class="hero">
+    <div class="date">Aug 12 · Day 47</div>
+    <h1>今日 6 词</h1>
+    <div class="theme">职场高效沟通</div>
+    <div class="progress">
+      <div class="track"><i></i></div>
+      <div class="plabel">ROUND 3 · 18/30</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-top">
+      <span class="card-no">01</span>
+      <span class="card-word">concise</span>
+      <span class="card-pos">ADJ.</span>
+    </div>
+    <div class="card-phon">/kənˈsaɪs/</div>
+    <div class="card-meaning">简洁的，简明的</div>
+    <div class="card-ex">Please keep your report <b>concise</b> and to the point.</div>
+    <div class="card-ex-cn">请保持报告简洁，切中要点。</div>
+    <div class="card-note"><b>记忆</b> con-一起 + -cise切 → 多余的一起切掉<br><b>搭配</b> concise summary · concise explanation</div>
+  </div>
+
+  <div class="card">
+    <div class="card-top">
+      <span class="card-no">02</span>
+      <span class="card-word">clarify</span>
+      <span class="card-pos">V.</span>
+    </div>
+    <div class="card-phon">/ˈklærəfaɪ/</div>
+    <div class="card-meaning">澄清，阐明</div>
+    <div class="card-ex">Could you <b>clarify</b> the deadline for this project?</div>
+    <div class="card-ex-cn">你能澄清一下这个项目的截止日期吗？</div>
+    <div class="card-note"><b>记忆</b> clar-清楚 + -ify使 → 使变清楚<br><b>搭配</b> clarify the issue · clarify the requirements</div>
+  </div>
+
+  <div class="card">
+    <div class="card-top">
+      <span class="card-no">03</span>
+      <span class="card-word">articulate</span>
+      <span class="card-pos">V.</span>
+    </div>
+    <div class="card-phon">/ɑːrˈtɪkjuleɪt/</div>
+    <div class="card-meaning">清晰地表达；口齿清晰的</div>
+    <div class="card-ex">She <b>articulated</b> her concerns clearly in the meeting.</div>
+    <div class="card-ex-cn">她在会议上清晰地表达了自己的顾虑。</div>
+    <div class="card-note"><b>记忆</b> articul-关节 → 节节分明 → 表达清晰<br><b>搭配</b> articulate your ideas · articulate a vision</div>
+  </div>
+
+  <div class="card">
+    <div class="card-top">
+      <span class="card-no">04</span>
+      <span class="card-word">feedback</span>
+      <span class="card-pos">N.</span>
+    </div>
+    <div class="card-phon">/ˈfiːdbæk/</div>
+    <div class="card-meaning">反馈，反馈意见</div>
+    <div class="card-ex">We welcome your <b>feedback</b> on the new proposal.</div>
+    <div class="card-ex-cn">我们欢迎你对新提案的反馈。</div>
+    <div class="card-note"><b>记忆</b> feed喂 + back回 → 喂回来的信息<br><b>搭配</b> give feedback · feedback loop</div>
+  </div>
+
+  <div class="card">
+    <div class="card-top">
+      <span class="card-no">05</span>
+      <span class="card-word">align</span>
+      <span class="card-pos">V.</span>
+    </div>
+    <div class="card-phon">/əˈlaɪn/</div>
+    <div class="card-meaning">对齐，使一致</div>
+    <div class="card-ex">Let's <b>align</b> our goals before the meeting.</div>
+    <div class="card-ex-cn">我们在会议前先对齐目标。</div>
+    <div class="card-note"><b>记忆</b> a-向 + lign线 → 拉到一条线上<br><b>搭配</b> align with · align priorities</div>
+  </div>
+
+  <div class="card">
+    <div class="card-top">
+      <span class="card-no">06</span>
+      <span class="card-word">follow up</span>
+      <span class="card-pos">PHR.V.</span>
+    </div>
+    <div class="card-phon">/ˈfɒloʊ ʌp/</div>
+    <div class="card-meaning">跟进，追踪</div>
+    <div class="card-ex">I'll <b>follow up</b> with the client tomorrow.</div>
+    <div class="card-ex-cn">我明天会跟进客户。</div>
+    <div class="card-note"><b>记忆</b> follow跟随 + up向上 → 跟着事情往上走<br><b>搭配</b> follow up on · follow-up email</div>
+  </div>
+
+  <div class="foot">
+    <div class="lbl">今日串记</div>
+    <p>表达要 <b>concise</b>，疑问主动 <b>clarify</b>，观点 <b>articulate</b> 清楚，再收 <b>feedback</b>、与团队 <b>align</b>，最后 <b>follow up</b> 到底——一次沟通，完整闭环。</p>
+  </div>
+
+</div>
+</body>
+</html>

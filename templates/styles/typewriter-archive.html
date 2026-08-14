@@ -1,0 +1,235 @@
+<!--
+  每日英语单词卡片 · 风格模板
+  用法：保留本文件的 <style> 与整体结构，把示例内容替换为当日单词数据。
+  卡片数量按当日单词数（默认 5 张）增减；日期、主题名、串记总结按实际填写。
+-->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VOCAB FILE NO.47</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --kraft: #E4D7BF;
+    --paper: #F3ECDC;
+    --ink: #33302A;
+    --faded: #6E6759;
+    --stamp: #B03A2E;
+  }
+  body {
+    font-family: "Courier Prime", "Courier New", "SimSun", monospace;
+    background: var(--kraft);
+    background-image: radial-gradient(#00000012 1px, transparent 1px);
+    background-size: 20px 20px;
+    padding: 40px 16px 56px;
+    color: var(--ink);
+  }
+  .folder { max-width: 680px; margin: 0 auto; position: relative; }
+
+  /* ===== 档案头 ===== */
+  .file-head {
+    border: 2px solid var(--ink);
+    background: var(--paper);
+    padding: 22px 28px;
+    position: relative;
+  }
+  .file-head .row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    letter-spacing: .12em;
+    color: var(--faded);
+  }
+  .file-head h1 {
+    margin-top: 14px;
+    font-size: 26px;
+    letter-spacing: .04em;
+  }
+  .file-head .subject {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--faded);
+  }
+  .file-head .subject b { color: var(--ink); }
+  .stamp {
+    position: absolute;
+    top: 16px; right: 22px;
+    transform: rotate(8deg);
+    border: 3px double var(--stamp);
+    color: var(--stamp);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .2em;
+    padding: 6px 12px;
+    opacity: .85;
+    border-radius: 4px;
+  }
+
+  /* ===== 条目 ===== */
+  .record {
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    border-top: none;
+    padding: 20px 28px 18px;
+  }
+  .record .r-head { display: flex; align-items: baseline; flex-wrap: wrap; gap: 10px; }
+  .record .r-no { font-size: 12px; color: var(--faded); }
+  .record .r-word {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: .06em;
+  }
+  .record .r-phon { font-size: 13px; font-style: italic; color: var(--faded); }
+  .record .r-pos {
+    font-size: 11px;
+    font-weight: 700;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 2px 8px;
+    letter-spacing: .15em;
+  }
+  .record .r-meaning { margin: 8px 0 10px; font-size: 15px; font-weight: 700; }
+  .record .r-ex { font-size: 13.5px; line-height: 1.8; }
+  .record .r-ex u {
+    text-decoration: none;
+    border-bottom: 2px solid var(--stamp);
+    font-weight: 700;
+  }
+  .record .r-ex-cn { font-size: 12.5px; color: var(--faded); margin-top: 2px; }
+  .record .r-note {
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px dashed #B7AB8F;
+    font-size: 12px;
+    line-height: 1.9;
+    color: var(--faded);
+  }
+  .record .r-note b { color: var(--ink); }
+
+  /* ===== 档案尾 ===== */
+  .file-foot {
+    border: 2px solid var(--ink);
+    border-top: none;
+    background: var(--paper);
+    padding: 18px 28px 22px;
+  }
+  .file-foot .lbl {
+    font-size: 11px;
+    letter-spacing: .3em;
+    color: var(--stamp);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .file-foot p { font-size: 12.5px; line-height: 2; }
+  .file-foot u { text-decoration: none; border-bottom: 2px solid var(--stamp); font-weight: 700; }
+  .sign {
+    margin-top: 14px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--faded);
+    letter-spacing: .1em;
+  }
+</style>
+</head>
+<body>
+<div class="folder">
+
+  <div class="file-head">
+    <div class="stamp">DAILY<br>WORDS</div>
+    <div class="row"><span>FILE NO. 047 / 2026</span><span>DEPT. OF ENGLISH</span></div>
+    <h1>VOCABULARY RECORD — 每日六词</h1>
+    <div class="subject">SUBJECT: <b>职场高效沟通</b> ｜ DATE: <b>2026-08-12</b> ｜ ROUND: <b>3</b></div>
+  </div>
+
+  <div class="record">
+    <div class="r-head">
+      <span class="r-no">[01]</span>
+      <span class="r-word">CONCISE</span>
+      <span class="r-phon">/kənˈsaɪs/</span>
+      <span class="r-pos">ADJ.</span>
+    </div>
+    <div class="r-meaning">简洁的，简明的</div>
+    <div class="r-ex">Please keep your report <u>concise</u> and to the point.</div>
+    <div class="r-ex-cn">请保持报告简洁，切中要点。</div>
+    <div class="r-note"><b>MEMO:</b> con-（一起）+ -cise（切）→ 多余的一起切掉<br><b>USAGE:</b> concise summary / concise explanation / be concise and clear</div>
+  </div>
+
+  <div class="record">
+    <div class="r-head">
+      <span class="r-no">[02]</span>
+      <span class="r-word">CLARIFY</span>
+      <span class="r-phon">/ˈklærəfaɪ/</span>
+      <span class="r-pos">V.</span>
+    </div>
+    <div class="r-meaning">澄清，阐明</div>
+    <div class="r-ex">Could you <u>clarify</u> the deadline for this project?</div>
+    <div class="r-ex-cn">你能澄清一下这个项目的截止日期吗？</div>
+    <div class="r-note"><b>MEMO:</b> clar-（清楚）+ -ify（使…）→ 使变清楚<br><b>USAGE:</b> clarify the issue / clarify one's position / clarify the requirements</div>
+  </div>
+
+  <div class="record">
+    <div class="r-head">
+      <span class="r-no">[03]</span>
+      <span class="r-word">ARTICULATE</span>
+      <span class="r-phon">/ɑːrˈtɪkjuleɪt/</span>
+      <span class="r-pos">V.</span>
+    </div>
+    <div class="r-meaning">清晰地表达；口齿清晰的</div>
+    <div class="r-ex">She <u>articulated</u> her concerns clearly in the meeting.</div>
+    <div class="r-ex-cn">她在会议上清晰地表达了自己的顾虑。</div>
+    <div class="r-note"><b>MEMO:</b> articul-（关节）→ 节节分明 → 表达清晰<br><b>USAGE:</b> articulate your ideas / articulate a vision / be highly articulate</div>
+  </div>
+
+  <div class="record">
+    <div class="r-head">
+      <span class="r-no">[04]</span>
+      <span class="r-word">FEEDBACK</span>
+      <span class="r-phon">/ˈfiːdbæk/</span>
+      <span class="r-pos">N.</span>
+    </div>
+    <div class="r-meaning">反馈，反馈意见</div>
+    <div class="r-ex">We welcome your <u>feedback</u> on the new proposal.</div>
+    <div class="r-ex-cn">我们欢迎你对新提案的反馈。</div>
+    <div class="r-note"><b>MEMO:</b> feed（喂）+ back（回）→ 喂回来的信息<br><b>USAGE:</b> give feedback / constructive feedback / feedback loop</div>
+  </div>
+
+  <div class="record">
+    <div class="r-head">
+      <span class="r-no">[05]</span>
+      <span class="r-word">ALIGN</span>
+      <span class="r-phon">/əˈlaɪn/</span>
+      <span class="r-pos">V.</span>
+    </div>
+    <div class="r-meaning">对齐，使一致</div>
+    <div class="r-ex">Let's <u>align</u> our goals before the meeting.</div>
+    <div class="r-ex-cn">我们在会议前先对齐目标。</div>
+    <div class="r-note"><b>MEMO:</b> a-（向）+ lign（线）→ 拉到一条线上<br><b>USAGE:</b> align with / align priorities / align the team</div>
+  </div>
+
+  <div class="record">
+    <div class="r-head">
+      <span class="r-no">[06]</span>
+      <span class="r-word">FOLLOW UP</span>
+      <span class="r-phon">/ˈfɒloʊ ʌp/</span>
+      <span class="r-pos">PHR.V.</span>
+    </div>
+    <div class="r-meaning">跟进，追踪</div>
+    <div class="r-ex">I'll <u>follow up</u> with the client tomorrow.</div>
+    <div class="r-ex-cn">我明天会跟进客户。</div>
+    <div class="r-note"><b>MEMO:</b> follow（跟随）+ up（向上）→ 跟着事情往上走<br><b>USAGE:</b> follow up on / follow-up email / follow up regularly</div>
+  </div>
+
+  <div class="file-foot">
+    <div class="lbl">SUMMARY / 串记</div>
+    <p>表达要 <u>concise</u>，疑问主动 <u>clarify</u>，观点 <u>articulate</u> 清楚，再收 <u>feedback</u>、与团队 <u>align</u>，最后 <u>follow up</u> 到底——一次沟通，完整闭环。</p>
+    <div class="sign"><span>FILED BY: DAILY-ENGLISH-WORDS</span><span>PAGE 1 OF 1</span></div>
+  </div>
+
+</div>
+</body>
+</html>

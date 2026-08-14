@@ -11,6 +11,7 @@
 - 📚 **每日 5 词**：每次推荐 5 个主题连贯的实用单词（生活 + 职场双场景）
 - 🎴 **结构化卡片**：单词 / 音标 / 词性 / 词义 / 例句 / 记忆提示 / 常用搭配，一应俱全
 - 📄 **HTML 卡片文件**：自动生成精美 HTML，可直接分享或用于小红书等平台
+- 🎨 **9 种卡片风格可选**：`templates/styles/` 内置手账海报、深色词典、大字报、日系极简、索引卡、打字机档案、松林阅读等多套模板，见下方「🎨 卡片风格」
 - 🔄 **轮次复习机制**：每轮结束自动生成「上轮单词一览」复习页，温故知新
 - 🛡️ **自动去重**：基于 `word-bank.md` 词库汇总表，绝不重复推荐
 - 🛡️ **工程化设计**：内置失败模式编码、异常处理表、反例黑名单（详见 SKILL.md）
@@ -87,6 +88,24 @@ git clone https://github.com/fang-123559/daily-english-words.git
 
 首次使用请复制 [templates/word-bank-template.md](templates/word-bank-template.md) 为项目根目录下的 `word-bank.md`。
 
+## 🎨 卡片风格
+
+HTML 卡片支持多套风格模板，使用时告诉 AI 你想要的风格名即可（如「今天用深色词典风格」），不指定则用默认经典模板：
+
+| 风格 | 模板文件 | 特点 |
+|------|----------|------|
+| 经典文档（默认） | [word-card-template.html](templates/word-card-template.html) | 白卡片 + 蓝色主调，简洁通用 |
+| 手账海报 | [journal-poster.html](templates/styles/journal-poster.html) | 竖版小红书海报，胶带贴卡、日期印章 |
+| 精修文档 | [refined-doc.html](templates/styles/refined-doc.html) | 经典版的统一配色升级款 |
+| 深色词典 | [dark-lexicon.html](templates/styles/dark-lexicon.html) | 深墨蓝底 + 金色点缀，词典式排版 |
+| 大字报 | [editorial-bulletin.html](templates/styles/editorial-bulletin.html) | 黑粗边框 + 荧光黄高亮，报刊公报感 |
+| 日系极简 | [muji-minimal.html](templates/styles/muji-minimal.html) | 大量留白、发丝分隔线 |
+| 索引卡 | [index-flashcard.html](templates/styles/index-flashcard.html) | 横线活页卡 + 分类标签 + 手写体 |
+| 打字机档案 | [typewriter-archive.html](templates/styles/typewriter-archive.html) | 牛皮纸档案袋 + 等宽字体 + 印章 |
+| 松林阅读 | [pine-app.html](templates/styles/pine-app.html) | 深松绿底 + 奶油实卡，阅读 APP 质感 |
+
+> 直接点开对应模板文件即可预览效果；也可以让 AI「把今天和昨天的卡片都换成 XX 风格」重新生成。
+
 ## 🗂️ 项目结构
 
 ```
@@ -98,13 +117,16 @@ daily-english-words/
 │   └── automation-prompt.md      # 自动化定时任务的 prompt 模板
 ├── templates/
 │   ├── word-bank-template.md     # word-bank.md 词库模板（去重用）
-│   └── word-card-template.html   # HTML 卡片模板
+│   ├── word-card-template.html   # HTML 卡片模板（默认经典风格）
+│   └── styles/                   # 可选卡片风格模板（见上方「卡片风格」）
 └── examples/                     # 完整输出示例（HTML 卡片文件）
 ```
 
 ## ⚙️ 自定义
 
-- **改配色**：修改 `templates/word-card-template.html` 中 CSS 的 `#2563eb`（主色）、`#FFB6C1`（表头边框色）
+- **换风格**：对话中直接说「用 XX 风格」，AI 会改用 `templates/styles/` 下对应模板
+- **改配色**：修改 `templates/word-card-template.html` 中 CSS 的 `#2563eb`（主色）、`#FFB6C1`（表头边框色）；其他风格直接改对应模板文件的 CSS 变量
+- **加风格**：仿照 `templates/styles/` 下现有模板新增 HTML 文件，并在 SKILL.md 的风格一览表中登记
 - **改推送风格**：调整「单词卡片」部分的模板结构
 - **改触发场景**：修改 SKILL.md frontmatter 中的 `description` 触发词
 

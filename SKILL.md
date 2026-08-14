@@ -88,10 +88,28 @@ agent_created: true
 
 #### 4. HTML 卡片文件（可选但推荐）
 
-推送完成后，基于 `templates/word-card-template.html` 生成完整 HTML 文件：
+推送完成后，生成完整 HTML 卡片文件：
+
+**第 1 步：确认卡片风格**
+
+`templates/styles/` 下提供多种卡片风格。若用户曾指定偏好风格（包括历史对话中指定过的），使用对应模板；未指定则默认使用经典模板 `templates/word-card-template.html`。可用风格一览：
+
+| 风格 | 模板文件 | 特点 |
+|------|----------|------|
+| 经典文档（默认） | `templates/word-card-template.html` | 白卡片 + 蓝色主调，简洁通用 |
+| 手账海报 | `templates/styles/journal-poster.html` | 竖版小红书海报，胶带贴卡、日期印章（无例句区） |
+| 精修文档 | `templates/styles/refined-doc.html` | 经典版的统一配色升级款，层次感更强 |
+| 深色词典 | `templates/styles/dark-lexicon.html` | 深墨蓝底 + 金色点缀，词典式排版 |
+| 大字报 | `templates/styles/editorial-bulletin.html` | 黑粗边框 + 荧光黄高亮，报刊公报感 |
+| 日系极简 | `templates/styles/muji-minimal.html` | 大量留白、发丝分隔线，克制安静 |
+| 索引卡 | `templates/styles/index-flashcard.html` | 横线活页卡 + 分类标签 + 手写体 |
+| 打字机档案 | `templates/styles/typewriter-archive.html` | 牛皮纸档案袋 + 等宽字体 + 印章 |
+| 松林阅读 | `templates/styles/pine-app.html` | 深松绿底 + 奶油实卡，阅读 APP 质感 |
+
+**第 2 步：生成并保存**
+- 以所选模板为样式参照：保留其 `<style>` 与整体结构，把示例内容替换为当日单词数据（卡片数量按当日单词数增减）
 - 保存到 `output/M.DD-word-cards.html`（M.DD 为当天日期）
 - 必须包含完整的 `<!DOCTYPE html>`、`<html>`、`<head>`、`<body>` 结构
-- 必须包含模板中的所有 CSS 样式、表头、5张单词卡片、汇总表格、底部总结
 - 单词数据必须与对话输出一致
 
 ### 第四步：更新词库

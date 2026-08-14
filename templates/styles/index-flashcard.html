@@ -1,0 +1,236 @@
+<!--
+  每日英语单词卡片 · 风格模板
+  用法：保留本文件的 <style> 与整体结构，把示例内容替换为当日单词数据。
+  卡片数量按当日单词数（默认 5 张）增减；日期、主题名、串记总结按实际填写。
+-->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>单词索引卡 · 职场高效沟通</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --card: #FDFBF3;
+    --rule-blue: #B9CFE8;
+    --margin-red: #E8A0A0;
+    --ink: #2C2C34;
+    --soft: #71717C;
+    --tab: #F2B84B;
+  }
+  body {
+    font-family: "Inter", "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: #DAD5C8;
+    background-image: radial-gradient(#00000010 1px, transparent 1px);
+    background-size: 18px 18px;
+    padding: 36px 16px 48px;
+  }
+  .stack { max-width: 640px; margin: 0 auto; }
+
+  /* ===== 盒盖 ===== */
+  .box-lid {
+    background: var(--ink);
+    color: #F5F1E6;
+    border-radius: 10px 10px 0 0;
+    padding: 20px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .box-lid .t { font-size: 18px; font-weight: 700; letter-spacing: .06em; }
+  .box-lid .d {
+    font-family: "Caveat", cursive;
+    font-size: 20px;
+    color: var(--tab);
+  }
+
+  /* ===== 索引卡 ===== */
+  .icard {
+    position: relative;
+    background: var(--card);
+    background-image:
+      linear-gradient(to right, transparent 56px, var(--margin-red) 56px, var(--margin-red) 57.5px, transparent 57.5px),
+      repeating-linear-gradient(to bottom, transparent 0 31px, var(--rule-blue) 31px 32px);
+    border: 1px solid #CFC9B8;
+    border-top: none;
+    padding: 22px 26px 20px 76px;
+    box-shadow: 0 2px 5px rgba(44,44,52,.10);
+  }
+  .icard:last-of-type { border-radius: 0 0 10px 10px; }
+
+  .tab {
+    position: absolute;
+    top: -1px; right: 28px;
+    background: var(--tab);
+    color: var(--ink);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    padding: 3px 12px 5px;
+    border-radius: 0 0 6px 6px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.15);
+  }
+  .icard:nth-child(odd) .tab { right: 56px; background: #7FA8C9; color: #fff; }
+  .icard:nth-child(3n) .tab { background: #C97F8E; color: #fff; }
+
+  .icard-head {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 2px;
+  }
+  .icard-word {
+    font-family: "Caveat", cursive;
+    font-size: 34px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .icard-phon { font-size: 12.5px; color: var(--soft); }
+  .icard-pos {
+    font-size: 10.5px;
+    font-weight: 700;
+    color: var(--soft);
+    border: 1.5px solid var(--soft);
+    border-radius: 3px;
+    padding: 1px 6px;
+  }
+  .icard-meaning {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 4px 0 6px;
+  }
+  .icard-ex { font-size: 13.5px; line-height: 32px; color: var(--ink); }
+  .icard-ex strong {
+    font-weight: 700;
+    background: linear-gradient(transparent 62%, #FFE08A 62%);
+    padding: 0 2px;
+  }
+  .icard-ex-cn { font-size: 12.5px; line-height: 32px; color: var(--soft); }
+  .icard-note {
+    font-family: "Caveat", cursive;
+    font-size: 18px;
+    line-height: 32px;
+    color: #4A6FA5;
+  }
+  .icard-note .sep { color: #B0B0A5; margin: 0 8px; font-family: Inter; font-size: 12px; }
+
+  /* ===== 盒底 ===== */
+  .box-bottom {
+    margin-top: 20px;
+    background: var(--card);
+    border: 1px solid #CFC9B8;
+    border-radius: 10px;
+    padding: 18px 26px;
+    box-shadow: 0 2px 5px rgba(44,44,52,.10);
+  }
+  .box-bottom .lbl {
+    font-family: "Caveat", cursive;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .box-bottom p { font-size: 13px; line-height: 1.9; color: var(--soft); }
+  .box-bottom strong { color: var(--ink); background: linear-gradient(transparent 62%, #FFE08A 62%); padding: 0 2px; }
+</style>
+</head>
+<body>
+<div class="stack">
+
+  <div class="box-lid">
+    <div class="t">单词索引卡 · 职场高效沟通</div>
+    <div class="d">Aug 12 · Day 47</div>
+  </div>
+
+  <div class="icard">
+    <div class="tab">01</div>
+    <div class="icard-head">
+      <span class="icard-word">concise</span>
+      <span class="icard-phon">/kənˈsaɪs/</span>
+      <span class="icard-pos">adj.</span>
+    </div>
+    <div class="icard-meaning">简洁的，简明的</div>
+    <div class="icard-ex">Please keep your report <strong>concise</strong> and to the point.</div>
+    <div class="icard-ex-cn">请保持报告简洁，切中要点。</div>
+    <div class="icard-note">con-一起 + -cise切 → 多余的一起切掉<span class="sep">｜</span>concise summary · concise explanation</div>
+  </div>
+
+  <div class="icard">
+    <div class="tab">02</div>
+    <div class="icard-head">
+      <span class="icard-word">clarify</span>
+      <span class="icard-phon">/ˈklærəfaɪ/</span>
+      <span class="icard-pos">v.</span>
+    </div>
+    <div class="icard-meaning">澄清，阐明</div>
+    <div class="icard-ex">Could you <strong>clarify</strong> the deadline for this project?</div>
+    <div class="icard-ex-cn">你能澄清一下这个项目的截止日期吗？</div>
+    <div class="icard-note">clar-清楚 + -ify使 → 使变清楚<span class="sep">｜</span>clarify the issue · clarify the requirements</div>
+  </div>
+
+  <div class="icard">
+    <div class="tab">03</div>
+    <div class="icard-head">
+      <span class="icard-word">articulate</span>
+      <span class="icard-phon">/ɑːrˈtɪkjuleɪt/</span>
+      <span class="icard-pos">v.</span>
+    </div>
+    <div class="icard-meaning">清晰地表达；口齿清晰的</div>
+    <div class="icard-ex">She <strong>articulated</strong> her concerns clearly in the meeting.</div>
+    <div class="icard-ex-cn">她在会议上清晰地表达了自己的顾虑。</div>
+    <div class="icard-note">articul-关节 → 节节分明 → 表达清晰<span class="sep">｜</span>articulate your ideas · articulate a vision</div>
+  </div>
+
+  <div class="icard">
+    <div class="tab">04</div>
+    <div class="icard-head">
+      <span class="icard-word">feedback</span>
+      <span class="icard-phon">/ˈfiːdbæk/</span>
+      <span class="icard-pos">n.</span>
+    </div>
+    <div class="icard-meaning">反馈，反馈意见</div>
+    <div class="icard-ex">We welcome your <strong>feedback</strong> on the new proposal.</div>
+    <div class="icard-ex-cn">我们欢迎你对新提案的反馈。</div>
+    <div class="icard-note">feed喂 + back回 → 喂回来的信息<span class="sep">｜</span>give feedback · feedback loop</div>
+  </div>
+
+  <div class="icard">
+    <div class="tab">05</div>
+    <div class="icard-head">
+      <span class="icard-word">align</span>
+      <span class="icard-phon">/əˈlaɪn/</span>
+      <span class="icard-pos">v.</span>
+    </div>
+    <div class="icard-meaning">对齐，使一致</div>
+    <div class="icard-ex">Let's <strong>align</strong> our goals before the meeting.</div>
+    <div class="icard-ex-cn">我们在会议前先对齐目标。</div>
+    <div class="icard-note">a-向 + lign线 → 拉到一条线上<span class="sep">｜</span>align with · align priorities</div>
+  </div>
+
+  <div class="icard">
+    <div class="tab">06</div>
+    <div class="icard-head">
+      <span class="icard-word">follow up</span>
+      <span class="icard-phon">/ˈfɒloʊ ʌp/</span>
+      <span class="icard-pos">phr.v.</span>
+    </div>
+    <div class="icard-meaning">跟进，追踪</div>
+    <div class="icard-ex">I'll <strong>follow up</strong> with the client tomorrow.</div>
+    <div class="icard-ex-cn">我明天会跟进客户。</div>
+    <div class="icard-note">follow跟随 + up向上 → 跟着事情往上走<span class="sep">｜</span>follow up on · follow-up email</div>
+  </div>
+
+  <div class="box-bottom">
+    <div class="lbl">今日串记</div>
+    <p>表达要 <strong>concise</strong>，疑问主动 <strong>clarify</strong>，观点 <strong>articulate</strong> 清楚，再收 <strong>feedback</strong>、与团队 <strong>align</strong>，最后 <strong>follow up</strong> 到底。</p>
+  </div>
+
+</div>
+</body>
+</html>

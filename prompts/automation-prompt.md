@@ -73,9 +73,10 @@
 
 ### 4. HTML 卡片文件（执行后必做）
 
-推送完成后，**必须**基于 `{PROJECT_DIR}/templates/word-card-template.html` 生成完整的 HTML 卡片文件并保存：
+推送完成后，**必须**生成完整的 HTML 卡片文件并保存：
 
-1. **生成 HTML 文件**：填入今日单词数据（表头、5张单词卡片、汇总表格、底部总结）
+0. **确认风格**：若用户已指定偏好风格，使用 `{PROJECT_DIR}/templates/styles/` 下的对应模板（风格清单见 SKILL.md「HTML 卡片文件」一节）；未指定则默认使用 `{PROJECT_DIR}/templates/word-card-template.html`
+1. **生成 HTML 文件**：以所选模板为样式参照，填入今日单词数据（表头、单词卡片、汇总表格、底部总结）
 2. **保存文件**：保存到 `{PROJECT_DIR}/output/M.DD-word-cards.html`（M.DD 为当天日期，如 6.9、6.10）
 3. **展示预览**：使用 `preview_url` 工具展示生成的 HTML 文件，让用户确认效果
 
@@ -84,7 +85,7 @@
 - 必须包含模板中的所有 CSS 样式
 - 单词数据必须与对话输出一致
 
-## UI 样式要求（输出为 HTML 时参考，纯文本输出时跳过）
+## UI 样式要求（对应默认经典模板；选用 styles/ 下其他风格时以对应模板文件为准，纯文本输出时跳过）
 
 - **表头**：白色背景，2px solid #FFB6C1 淡粉色边框，border-radius: 8px，padding: 16px 24px，居中显示
 - 卡片：白色背景，0.5px 边框，border-radius: 8px，padding: 20px 24px

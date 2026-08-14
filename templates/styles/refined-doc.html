@@ -1,0 +1,365 @@
+<!--
+  每日英语单词卡片 · 风格模板
+  用法：保留本文件的 <style> 与整体结构，把示例内容替换为当日单词数据。
+  卡片数量按当日单词数（默认 5 张）增减；日期、主题名、串记总结按实际填写。
+-->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>每日英语单词卡片 · 职场高效沟通</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --ink: #1F2430;
+    --body: #3D4351;
+    --muted: #8A90A0;
+    --primary: #2F5AE8;
+    --primary-soft: #EEF2FF;
+    --primary-line: #C9D6FA;
+    --accent: #C2410C;
+    --accent-soft: #FFF4EC;
+    --bg: #F6F7F9;
+    --card: #FFFFFF;
+    --hairline: #E6E8ED;
+  }
+  body {
+    font-family: "Inter", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    padding: 40px 20px;
+    color: var(--body);
+  }
+  .container { max-width: 720px; margin: 0 auto; }
+
+  /* ===== 刊头 ===== */
+  .masthead {
+    background: var(--card);
+    border: 1px solid var(--hairline);
+    border-radius: 12px;
+    padding: 28px 32px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 2px rgba(31,36,48,.04);
+  }
+  .masthead-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .28em;
+    color: var(--primary);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .masthead h1 {
+    font-family: "Source Serif 4", Georgia, "Songti SC", serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+  .masthead-meta {
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--muted);
+    display: flex;
+    gap: 16px;
+  }
+
+  /* ===== 单词卡片 ===== */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--hairline);
+    border-radius: 12px;
+    padding: 24px 28px 22px;
+    margin-bottom: 16px;
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    column-gap: 18px;
+    box-shadow: 0 1px 2px rgba(31,36,48,.04);
+  }
+  .card-index {
+    font-family: "Source Serif 4", Georgia, serif;
+    font-size: 30px;
+    font-weight: 600;
+    color: var(--primary-line);
+    line-height: 1.15;
+    border-right: 1px solid var(--hairline);
+    padding-right: 14px;
+  }
+  .card-head {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .card-word {
+    font-family: "Source Serif 4", Georgia, serif;
+    font-size: 23px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -.01em;
+  }
+  .card-phonetic {
+    font-family: "Source Serif 4", Georgia, serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .card-pos {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--primary);
+    background: var(--primary-soft);
+    border-radius: 4px;
+    padding: 2px 8px;
+    letter-spacing: .04em;
+  }
+  .card-meaning {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 8px 0 14px;
+  }
+  .card-example {
+    border-left: 2px solid var(--primary-line);
+    padding-left: 12px;
+    margin-bottom: 14px;
+  }
+  .card-example-en {
+    font-size: 14.5px;
+    color: var(--body);
+    line-height: 1.65;
+  }
+  .card-example-en strong { color: var(--primary); font-weight: 600; }
+  .card-example-cn {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 3px;
+  }
+  .card-memory {
+    background: var(--accent-soft);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--body);
+  }
+  .card-memory .label { color: var(--accent); font-weight: 600; }
+  .card-memory .collocation {
+    margin-top: 3px;
+    color: #7A5238;
+  }
+
+  /* ===== 汇总表 ===== */
+  .section-title {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .22em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin: 28px 4px 12px;
+  }
+  .summary-wrap {
+    background: var(--card);
+    border: 1px solid var(--hairline);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 1px 2px rgba(31,36,48,.04);
+  }
+  .summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  .summary-table th {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .06em;
+    color: var(--muted);
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--hairline);
+    background: #FAFBFC;
+  }
+  .summary-table td {
+    padding: 11px 16px;
+    border-bottom: 1px solid var(--hairline);
+    color: var(--body);
+  }
+  .summary-table tbody tr:last-child td { border-bottom: none; }
+  .summary-table td.word-cell {
+    font-family: "Source Serif 4", Georgia, serif;
+    font-weight: 700;
+    color: var(--primary);
+  }
+  .summary-table td.no-cell { color: var(--muted); width: 36px; }
+
+  /* ===== 底部总结 ===== */
+  .summary-text {
+    margin-top: 16px;
+    background: var(--card);
+    border: 1px solid var(--hairline);
+    border-left: 3px solid var(--primary);
+    border-radius: 12px;
+    padding: 16px 22px;
+    font-size: 14px;
+    line-height: 1.9;
+    color: var(--body);
+  }
+  .summary-text strong { color: var(--primary); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="masthead">
+    <div class="masthead-eyebrow">Daily English · Day 47</div>
+    <h1>8.12 英语单词卡片 — 职场高效沟通</h1>
+    <div class="masthead-meta"><span>今日 6 词</span><span>Round 3 · Day 2</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-index">1</div>
+    <div>
+      <div class="card-head">
+        <span class="card-word">concise</span>
+        <span class="card-phonetic">/kənˈsaɪs/</span>
+        <span class="card-pos">adj.</span>
+      </div>
+      <div class="card-meaning">简洁的，简明的</div>
+      <div class="card-example">
+        <div class="card-example-en">Please keep your report <strong>concise</strong> and to the point.</div>
+        <div class="card-example-cn">请保持报告简洁，切中要点。</div>
+      </div>
+      <div class="card-memory">
+        <span class="label">记忆</span> · con-（一起）+ -cise（切）→ 把多余的部分一起切掉 → 简洁的
+        <div class="collocation">搭配 · concise summary / concise explanation / be concise and clear</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-index">2</div>
+    <div>
+      <div class="card-head">
+        <span class="card-word">clarify</span>
+        <span class="card-phonetic">/ˈklærəfaɪ/</span>
+        <span class="card-pos">v.</span>
+      </div>
+      <div class="card-meaning">澄清，阐明</div>
+      <div class="card-example">
+        <div class="card-example-en">Could you <strong>clarify</strong> the deadline for this project?</div>
+        <div class="card-example-cn">你能澄清一下这个项目的截止日期吗？</div>
+      </div>
+      <div class="card-memory">
+        <span class="label">记忆</span> · clar-（清楚）+ -ify（使…）→ 使变清楚 → 澄清
+        <div class="collocation">搭配 · clarify the issue / clarify one's position / clarify the requirements</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-index">3</div>
+    <div>
+      <div class="card-head">
+        <span class="card-word">articulate</span>
+        <span class="card-phonetic">/ɑːrˈtɪkjuleɪt/</span>
+        <span class="card-pos">v.</span>
+      </div>
+      <div class="card-meaning">清晰地表达；口齿清晰的</div>
+      <div class="card-example">
+        <div class="card-example-en">She <strong>articulated</strong> her concerns clearly in the meeting.</div>
+        <div class="card-example-cn">她在会议上清晰地表达了自己的顾虑。</div>
+      </div>
+      <div class="card-memory">
+        <span class="label">记忆</span> · articul-（关节）→ 像关节一样节节分明 → 表达清晰
+        <div class="collocation">搭配 · articulate your ideas / articulate a vision / be highly articulate</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-index">4</div>
+    <div>
+      <div class="card-head">
+        <span class="card-word">feedback</span>
+        <span class="card-phonetic">/ˈfiːdbæk/</span>
+        <span class="card-pos">n.</span>
+      </div>
+      <div class="card-meaning">反馈，反馈意见</div>
+      <div class="card-example">
+        <div class="card-example-en">We welcome your <strong>feedback</strong> on the new proposal.</div>
+        <div class="card-example-cn">我们欢迎你对新提案的反馈。</div>
+      </div>
+      <div class="card-memory">
+        <span class="label">记忆</span> · feed（喂）+ back（回）→ 喂回来的信息 → 反馈
+        <div class="collocation">搭配 · give feedback / constructive feedback / feedback loop</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-index">5</div>
+    <div>
+      <div class="card-head">
+        <span class="card-word">align</span>
+        <span class="card-phonetic">/əˈlaɪn/</span>
+        <span class="card-pos">v.</span>
+      </div>
+      <div class="card-meaning">对齐，使一致</div>
+      <div class="card-example">
+        <div class="card-example-en">Let's <strong>align</strong> our goals before the meeting.</div>
+        <div class="card-example-cn">我们在会议前先对齐目标。</div>
+      </div>
+      <div class="card-memory">
+        <span class="label">记忆</span> · a-（向）+ lign（线）→ 使成一条线 → 对齐
+        <div class="collocation">搭配 · align with / align priorities / align the team</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-index">6</div>
+    <div>
+      <div class="card-head">
+        <span class="card-word">follow up</span>
+        <span class="card-phonetic">/ˈfɒloʊ ʌp/</span>
+        <span class="card-pos">phr. v.</span>
+      </div>
+      <div class="card-meaning">跟进，追踪</div>
+      <div class="card-example">
+        <div class="card-example-en">I'll <strong>follow up</strong> with the client tomorrow.</div>
+        <div class="card-example-cn">我明天会跟进客户。</div>
+      </div>
+      <div class="card-memory">
+        <span class="label">记忆</span> · follow（跟随）+ up（向上）→ 跟着事情往上走 → 跟进
+        <div class="collocation">搭配 · follow up on / follow-up email / follow up regularly</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">今日一览</div>
+  <div class="summary-wrap">
+    <table class="summary-table">
+      <thead>
+        <tr><th>#</th><th>单词</th><th>词义（核心）</th><th>核心用法</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="no-cell">1</td><td class="word-cell">concise</td><td>简洁的</td><td>形容表达简明扼要</td></tr>
+        <tr><td class="no-cell">2</td><td class="word-cell">clarify</td><td>澄清</td><td>消除歧义，明确信息</td></tr>
+        <tr><td class="no-cell">3</td><td class="word-cell">articulate</td><td>清晰表达</td><td>有条理地说出观点</td></tr>
+        <tr><td class="no-cell">4</td><td class="word-cell">feedback</td><td>反馈</td><td>给予或接收意见</td></tr>
+        <tr><td class="no-cell">5</td><td class="word-cell">align</td><td>对齐</td><td>统一目标或方向</td></tr>
+        <tr><td class="no-cell">6</td><td class="word-cell">follow up</td><td>跟进</td><td>追踪后续进展</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="summary-text">
+    今天这 6 个词构成一次完整的专业沟通：表达要 <strong>concise</strong>，疑问主动 <strong>clarify</strong>，观点 <strong>articulate</strong> 清楚，然后收集 <strong>feedback</strong>、与团队 <strong>align</strong> 目标，最后 <strong>follow up</strong> 推进到底。
+  </div>
+
+</div>
+</body>
+</html>
