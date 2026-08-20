@@ -16,7 +16,7 @@
 - 🛡️ **自动去重**：基于 `word-bank.md` 词库汇总表，绝不重复推荐
 - 🛡️ **工程化设计**：内置失败模式编码、异常处理表、反例黑名单（详见 SKILL.md）
 - ⚙️ **可接入自动化**：可配置为每日定时任务自动执行
-- 🔁 **五词兼容**：`templates/styles/` 下的旧风格继续支持五词模式，不强行改造旧模板
+- 🧩 **两类模板**：默认使用六词模板，`templates/styles/` 下提供五词模板
 
 ## 🖼️ 效果预览
 
@@ -35,7 +35,7 @@
 | [2026-06-25](examples/2026-06-25-cross-cultural-communication.html) | 跨文化沟通 | diverse · inclusive · cultural · global · multilingual | 2026-06-25 |
 | [2026-08-13](examples/2026-08-13-emotional-awareness-self-regulation.html) | 情绪识别与自我调节 | overwhelmed · restless · trigger · balance · notice · regulate | 2026-08-13 |
 
-其中 6.23–6.25 是旧版五词示例；8.13 是默认 V3 六词模板示例。
+其中 6.23–6.25 是五词模板示例；8.13 是六词模板示例。
 
 ## 📦 安装方法
 
@@ -89,7 +89,7 @@ git clone https://github.com/fang-123559/daily-english-words.git
 默认每天推荐 6 个英语单词，严格按 SKILL.md 的 daily-english-words 模板执行：
 读取 word-bank.md 词库去重 → 判断轮次 → 选 6 个主题连贯的新词 → 输出卡片+表格+HTML → 更新词库
 
-如果明确指定 `templates/styles/` 下的旧风格，则使用五词兼容模式，保留对应旧模板结构。
+如果明确指定 `templates/styles/` 下的模板，则使用五词模板，保留对应模板结构。
 ```
 
 首次使用请复制 [templates/word-bank-template.md](templates/word-bank-template.md) 为项目根目录下的 `word-bank.md`。
@@ -100,7 +100,7 @@ HTML 卡片支持多套风格模板，使用时告诉 AI 你想要的风格名�
 
 | 风格 | 模板文件 | 特点 |
 |------|----------|------|
-| 经典文档（默认） | [word-card-template.html](templates/word-card-template.html) | V3 六词 + 米白橄榄绿，简洁通用 |
+| 经典文档（六词模板，默认） | [word-card-template.html](templates/word-card-template.html) | V3 六词 + 米白橄榄绿，简洁通用 |
 | 手账海报 | [journal-poster.html](templates/styles/journal-poster.html) | 竖版小红书海报，胶带贴卡、日期印章 |
 | 精修文档 | [refined-doc.html](templates/styles/refined-doc.html) | 经典版的统一配色升级款 |
 | 深色词典 | [dark-lexicon.html](templates/styles/dark-lexicon.html) | 深墨蓝底 + 金色点缀，词典式排版 |
@@ -123,9 +123,9 @@ daily-english-words/
 │   └── automation-prompt.md      # 自动化定时任务的 prompt 模板
 ├── templates/
 │   ├── word-bank-template.md     # word-bank.md 词库模板（去重用）
-│   ├── word-card-template.html   # 默认 V3 六词 HTML 卡片模板
-│   └── styles/                   # 既有五词兼容风格模板
-└── examples/                     # 五词与六词完整输出示例
+│   ├── word-card-template.html   # 六词模板（V3）
+│   └── styles/                   # 五词模板
+└── examples/                     # 五词与六词模板的完整输出示例
 ```
 
 ## ⚙️ 自定义
@@ -133,7 +133,7 @@ daily-english-words/
 - **换风格**：对话中直接说「用 XX 风格」，AI 会改用 `templates/styles/` 下对应模板
 - **改配色**：默认 V3 模板使用 CSS 变量控制米白、白色、橄榄绿和柔和浅灰；其他风格直接改对应模板文件的 CSS 变量
 - **加风格**：仿照 `templates/styles/` 下现有模板新增 HTML 文件，并在 SKILL.md 的风格一览表中登记
-- **改推送风格**：默认六词模板与旧五词风格分开维护，避免破坏兼容模式
+- **改推送风格**：六词模板与五词模板分开维护，避免改变既有模板结构
 - **改触发场景**：修改 SKILL.md frontmatter 中的 `description` 触发词
 
 ## 📜 License
