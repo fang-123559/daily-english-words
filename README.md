@@ -1,14 +1,14 @@
-# 每日5个英语单词 Daily English Words 📚
+# 每日英语单词 Daily English Words 📚
 
-一个**开箱即用的 Skill 模板**：让 AI 每天推荐 5 个主题连贯的实用英语单词，输出**结构化单词卡片 + 汇总表格 + 精美 HTML 卡片文件**，并自动去重、按轮次复习、记录词库。
+一个**开箱即用的 Skill 模板**：默认让 AI 每天推荐 6 个主题连贯的实用英语单词，输出**结构化单词卡片 + 汇总表格 + 精美 HTML 卡片文件**，并自动去重、按轮次复习、记录词库。
 
-> 每天 5 个词 · 主题连贯 · 越学越顺
+> 默认每天 6 个词 · 主题连贯 · 越学越顺
 
 ---
 
 ## ✨ 特性
 
-- 📚 **每日 5 词**：每次推荐 5 个主题连贯的实用单词（生活 + 职场双场景）
+- 📚 **每日 6 词**：默认推荐 6 个主题连贯的实用单词（生活 + 职场双场景）
 - 🎴 **结构化卡片**：单词 / 音标 / 词性 / 词义 / 例句 / 记忆提示 / 常用搭配，一应俱全
 - 📄 **HTML 卡片文件**：自动生成精美 HTML，可直接分享或用于小红书等平台
 - 🎨 **9 种卡片风格可选**：`templates/styles/` 内置手账海报、深色词典、大字报、日系极简、索引卡、打字机档案、松林阅读等多套模板，见下方「🎨 卡片风格」
@@ -16,6 +16,7 @@
 - 🛡️ **自动去重**：基于 `word-bank.md` 词库汇总表，绝不重复推荐
 - 🛡️ **工程化设计**：内置失败模式编码、异常处理表、反例黑名单（详见 SKILL.md）
 - ⚙️ **可接入自动化**：可配置为每日定时任务自动执行
+- 🔁 **五词兼容**：`templates/styles/` 下的旧风格继续支持五词模式，不强行改造旧模板
 
 ## 🖼️ 效果预览
 
@@ -32,6 +33,9 @@
 | [2026-06-23](examples/2026-06-23-leadership.html) | 领导力 | inspire · empower · mentor · motivate · vision | 2026-06-23 |
 | [2026-06-24](examples/2026-06-24-innovative-thinking.html) | 创新思维 | creative · brainstorm · prototype · iterate · experiment | 2026-06-24 |
 | [2026-06-25](examples/2026-06-25-cross-cultural-communication.html) | 跨文化沟通 | diverse · inclusive · cultural · global · multilingual | 2026-06-25 |
+| [2026-08-13](examples/2026-08-13-emotional-awareness-self-regulation.html) | 情绪识别与自我调节 | overwhelmed · restless · trigger · balance · notice · regulate | 2026-08-13 |
+
+其中 6.23–6.25 是旧版五词示例；8.13 是默认 V3 六词模板示例。
 
 ## 📦 安装方法
 
@@ -75,15 +79,17 @@ git clone https://github.com/fang-123559/daily-english-words.git
 
 安装完成后，在 AI 对话中输入任意触发词，即可生成今日单词卡片：
 
-> "每日英语单词"、"推荐5个英语单词"、"今天学什么单词"
+> "每日英语单词"、"推荐6个英语单词"、"今天学什么单词"
 
 ### 方式二：接入自动化定时推送（推荐）
 
 在 WorkBuddy / Codex / Claude 等平台创建一个每日定时任务，prompt 可参考 [prompts/automation-prompt.md](prompts/automation-prompt.md)：
 
 ```text
-每天推荐 5 个英语单词，严格按 SKILL.md 的 daily-english-words 模板执行：
-读取 word-bank.md 词库去重 → 判断轮次 → 选 5 个主题连贯的新词 → 输出卡片+表格+HTML → 更新词库
+默认每天推荐 6 个英语单词，严格按 SKILL.md 的 daily-english-words 模板执行：
+读取 word-bank.md 词库去重 → 判断轮次 → 选 6 个主题连贯的新词 → 输出卡片+表格+HTML → 更新词库
+
+如果明确指定 `templates/styles/` 下的旧风格，则使用五词兼容模式，保留对应旧模板结构。
 ```
 
 首次使用请复制 [templates/word-bank-template.md](templates/word-bank-template.md) 为项目根目录下的 `word-bank.md`。
@@ -94,7 +100,7 @@ HTML 卡片支持多套风格模板，使用时告诉 AI 你想要的风格名�
 
 | 风格 | 模板文件 | 特点 |
 |------|----------|------|
-| 经典文档（默认） | [word-card-template.html](templates/word-card-template.html) | 白卡片 + 蓝色主调，简洁通用 |
+| 经典文档（默认） | [word-card-template.html](templates/word-card-template.html) | V3 六词 + 米白橄榄绿，简洁通用 |
 | 手账海报 | [journal-poster.html](templates/styles/journal-poster.html) | 竖版小红书海报，胶带贴卡、日期印章 |
 | 精修文档 | [refined-doc.html](templates/styles/refined-doc.html) | 经典版的统一配色升级款 |
 | 深色词典 | [dark-lexicon.html](templates/styles/dark-lexicon.html) | 深墨蓝底 + 金色点缀，词典式排版 |
@@ -117,17 +123,17 @@ daily-english-words/
 │   └── automation-prompt.md      # 自动化定时任务的 prompt 模板
 ├── templates/
 │   ├── word-bank-template.md     # word-bank.md 词库模板（去重用）
-│   ├── word-card-template.html   # HTML 卡片模板（默认经典风格）
-│   └── styles/                   # 可选卡片风格模板（见上方「卡片风格」）
-└── examples/                     # 完整输出示例（HTML 卡片文件）
+│   ├── word-card-template.html   # 默认 V3 六词 HTML 卡片模板
+│   └── styles/                   # 既有五词兼容风格模板
+└── examples/                     # 五词与六词完整输出示例
 ```
 
 ## ⚙️ 自定义
 
 - **换风格**：对话中直接说「用 XX 风格」，AI 会改用 `templates/styles/` 下对应模板
-- **改配色**：修改 `templates/word-card-template.html` 中 CSS 的 `#2563eb`（主色）、`#FFB6C1`（表头边框色）；其他风格直接改对应模板文件的 CSS 变量
+- **改配色**：默认 V3 模板使用 CSS 变量控制米白、白色、橄榄绿和柔和浅灰；其他风格直接改对应模板文件的 CSS 变量
 - **加风格**：仿照 `templates/styles/` 下现有模板新增 HTML 文件，并在 SKILL.md 的风格一览表中登记
-- **改推送风格**：调整「单词卡片」部分的模板结构
+- **改推送风格**：默认六词模板与旧五词风格分开维护，避免破坏兼容模式
 - **改触发场景**：修改 SKILL.md frontmatter 中的 `description` 触发词
 
 ## 📜 License
@@ -136,4 +142,4 @@ daily-english-words/
 
 ---
 
-<p align="center"><b>每天 5 个词 · 让英语融入生活</b> 🇬🇧</p>
+<p align="center"><b>每天 6 个词 · 让英语融入生活</b> 🇬🇧</p>

@@ -1,266 +1,399 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>每日英语单词卡片</title>
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    background: #f5f5f5;
-    padding: 20px;
-  }
-  .container {
-    max-width: 800px;
-    margin: 0 auto;
-  }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{DATE_DISPLAY}} 每日六词 · {{THEME}}</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --page-bg: light-dark(#f4f5ef, #10110e);
+      --paper: light-dark(#ffffff, #1b1d18);
+      --text: light-dark(#171914, #f2f4ed);
+      --muted: light-dark(#666b5e, #b1b6a8);
+      --border: light-dark(#c6cbbd, #3e4237);
+      --accent: light-dark(#566319, #c6db6b);
+      --accent-soft: light-dark(#e7eccb, #30371a);
+      --note: light-dark(#eceee7, #272a23);
+      --note-text: light-dark(#4d5248, #cbd0c5);
+    }
 
-  /* ===== 表头 ===== */
-  .header {
-    background: #fff;
-    border: 2px solid #FFB6C1;
-    border-radius: 8px;
-    padding: 16px 24px;
-    margin-bottom: 16px;
-    text-align: center;
-  }
-  .header h1 {
-    font-size: 20px;
-    font-weight: 700;
-    color: #1a1a1a;
-    margin: 0;
-  }
+    * { box-sizing: border-box; }
 
-  /* ===== 单词卡片 ===== */
-  .card {
-    background: #fff;
-    border: 0.5px solid #e5e5e5;
-    border-radius: 8px;
-    padding: 20px 24px;
-    margin-bottom: 16px;
-  }
-  .card-header {
-    display: flex;
-    align-items: baseline;
-    gap: 10px;
-    margin-bottom: 8px;
-  }
-  .card-number {
-    font-size: 14px;
-    color: #999;
-    font-weight: 400;
-  }
-  .card-word {
-    font-size: 20px;
-    font-weight: 700;
-    color: #2563eb;
-  }
-  .card-phonetic {
-    font-size: 14px;
-    color: #999;
-  }
-  .card-pos {
-    display: inline-block;
-    background: #2563eb;
-    color: #fff;
-    font-size: 12px;
-    padding: 2px 8px;
-    border-radius: 4px;
-    margin-left: 4px;
-  }
-  .card-meaning {
-    font-size: 15px;
-    font-weight: 500;
-    color: #333;
-    margin: 6px 0 12px;
-  }
-  .card-example {
-    border-left: 2px solid #B5D4F4;
-    padding-left: 10px;
-    margin-bottom: 6px;
-  }
-  .card-example-en {
-    font-size: 14px;
-    color: #333;
-    line-height: 1.6;
-  }
-  .card-example-en strong {
-    color: #2563eb;
-    font-weight: 600;
-  }
-  .card-example-cn {
-    font-size: 13px;
-    color: #999;
-    margin-top: 4px;
-  }
-  .card-memory {
-    background: #FAEEDA;
-    border-radius: 6px;
-    padding: 10px 12px;
-    font-size: 13px;
-    color: #666;
-    line-height: 1.6;
-    margin-top: 12px;
-  }
-  .card-memory .label {
-    color: #e67e22;
-    font-weight: 600;
-  }
-  .card-memory .collocation {
-    color: #8B4513;
-    font-weight: 500;
-    margin-top: 4px;
-  }
+    body {
+      margin: 0;
+      background: var(--page-bg);
+      color: var(--text);
+      font-family: "Segoe UI", "Microsoft YaHei", "PingFang SC", sans-serif;
+    }
 
-  /* ===== 汇总表格 ===== */
-  .summary-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    font-size: 14px;
-  }
-  .summary-table th {
-    background: #f8f9fa;
-    font-weight: 600;
-    text-align: left;
-    padding: 10px 12px;
-    border: 0.5px solid #e5e5e5;
-  }
-  .summary-table td {
-    padding: 8px 12px;
-    border: 0.5px solid #e5e5e5;
-    color: #333;
-  }
-  .summary-table tbody tr:nth-child(even) td {
-    background: #f8f9fa;
-  }
+    strong, h1, h2, summary, th { font-weight: 500; }
 
-  /* ===== 底部总结 ===== */
-  .summary-text {
-    margin-top: 16px;
-    font-size: 14px;
-    color: #666;
-    line-height: 1.8;
-    padding: 12px 16px;
-    background: #fff;
-    border-radius: 8px;
-    border: 0.5px solid #e5e5e5;
-  }
+    .page {
+      width: min(100%, 78rem);
+      margin: 0 auto;
+      padding: 1.25rem;
+    }
 
-  /* ===== 复习页（新轮第一天用） ===== */
-  .review-block {
-    background: #fff;
-    border: 1px solid #e5e5e5;
-    border-radius: 8px;
-    padding: 1rem 1.25rem;
-    margin-bottom: 16px;
-  }
-  .review-header {
-    font-size: 14px;
-    font-weight: 700;
-    color: #1a1a1a;
-    margin-bottom: 10px;
-  }
-  .review-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 12.5px;
-  }
-  .review-table th {
-    background: #f8f9fa;
-    font-weight: 500;
-    text-align: left;
-    padding: 6px 8px;
-    border: 0.5px solid #e5e5e5;
-  }
-  .review-table td {
-    padding: 5px 8px;
-    border: 0.5px solid #e5e5e5;
-    color: #666;
-  }
-  .review-table tbody tr:nth-child(even) td {
-    background: #f8f9fa;
-  }
-  .review-footer {
-    margin-top: 10px;
-    font-size: 12.5px;
-    color: #999;
-    font-style: italic;
-  }
-</style>
+    .mono,
+    .word,
+    .phonetic,
+    .pos,
+    .chip {
+      font-family: "IBM Plex Mono", Consolas, monospace;
+    }
+
+    .top,
+    .meta,
+    .card-top,
+    .word-line,
+    .chips {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .75rem;
+      flex-wrap: wrap;
+    }
+
+    .top {
+      padding: .8rem 0;
+      border-top: 3px solid var(--accent);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .brand,
+    .kicker,
+    .number,
+    .label {
+      font-weight: 500;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+
+    .muted,
+    .phonetic,
+    .example-cn { color: var(--muted); }
+
+    .hero {
+      padding: 1.75rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero h1,
+    .hero p,
+    .card h2,
+    .card p,
+    .recall p { margin: 0; }
+
+    .hero h1 { margin-top: .45rem; }
+
+    .hero p {
+      max-width: 62ch;
+      margin-top: .65rem;
+      color: var(--muted);
+    }
+
+    .kicker,
+    .word,
+    .example-en strong { color: var(--accent); }
+
+    .word-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+      padding-top: 1rem;
+    }
+
+    .card {
+      display: flex;
+      min-width: 0;
+      flex-direction: column;
+      padding: 1rem;
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--accent);
+      border-radius: .45rem;
+      background: var(--paper);
+      overflow-wrap: anywhere;
+    }
+
+    .card-top { align-items: baseline; }
+
+    .word-line {
+      justify-content: flex-start;
+      align-items: baseline;
+      margin-top: .45rem;
+    }
+
+    .pos,
+    .chip {
+      display: inline-flex;
+      padding: .2rem .5rem;
+      border-radius: .3rem;
+      background: var(--accent-soft);
+    }
+
+    .pos { color: var(--accent); }
+
+    .meaning {
+      margin-top: .45rem !important;
+      font-weight: 500;
+    }
+
+    .card-body { flex: 1; }
+
+    .example {
+      margin-top: .85rem;
+      padding-left: .8rem;
+      border-left: 3px solid var(--accent);
+    }
+
+    .example-cn { margin-top: .3rem !important; }
+
+    .memory,
+    .usage {
+      margin-top: .85rem;
+      padding: .75rem;
+      border-radius: .35rem;
+      background: var(--note);
+      color: var(--note-text);
+    }
+
+    .chips {
+      justify-content: flex-start;
+      gap: .45rem;
+      margin-top: .85rem;
+    }
+
+    .after-grid {
+      display: grid;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .recall,
+    .reference,
+    .review {
+      padding: 1rem;
+      border: 1px solid var(--border);
+      border-radius: .45rem;
+      background: var(--paper);
+    }
+
+    .recall-list {
+      display: grid;
+      gap: .7rem;
+      margin-top: .8rem;
+    }
+
+    .question {
+      padding-top: .7rem;
+      border-top: 1px solid var(--border);
+    }
+
+    summary { cursor: pointer; }
+
+    .answer {
+      margin-top: .5rem !important;
+      color: var(--accent);
+    }
+
+    .table-wrap {
+      margin-top: .8rem;
+      border-top: 1px solid var(--border);
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+
+    th, td {
+      padding: .6rem;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+      vertical-align: top;
+      overflow-wrap: anywhere;
+    }
+
+    th { color: var(--muted); }
+    th:first-child, td:first-child { width: 3rem; }
+    th:nth-child(2), td:nth-child(2) { width: 18%; }
+    th:nth-child(3), td:nth-child(3) { width: 24%; }
+    tbody tr:last-child td { border-bottom: 0; }
+
+    .flow {
+      margin-top: 1rem;
+      padding: 1rem;
+      border-left: 3px solid var(--accent);
+      background: var(--paper);
+    }
+
+    .flow p {
+      margin: .45rem 0 0;
+      color: var(--muted);
+    }
+
+    @media (min-width: 841px) {
+      .hero h1 { white-space: nowrap; }
+    }
+
+    @media (max-width: 680px) {
+      .word-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 520px) {
+      .page { padding: .8rem; }
+      .top, .meta { align-items: flex-start; flex-direction: column; }
+      .hero { padding: 1.15rem 0; }
+      .card, .recall, .reference, .review, .flow { padding: .8rem; }
+      .table-wrap { overflow: visible; }
+      table, tbody, tr, td { display: block; width: 100%; }
+      thead { display: none; }
+      tr { padding: .55rem 0; border-bottom: 1px solid var(--border); }
+      tbody tr:last-child { border-bottom: 0; }
+      td, td:first-child, td:nth-child(2), td:nth-child(3) {
+        display: grid;
+        grid-template-columns: 5.5rem minmax(0, 1fr);
+        gap: .5rem;
+        width: 100%;
+        padding: .25rem 0;
+        border-bottom: 0;
+      }
+      td::before {
+        content: attr(data-label);
+        color: var(--muted);
+        font-family: "IBM Plex Mono", Consolas, monospace;
+      }
+      td:first-child { display: none; }
+    }
+  </style>
 </head>
 <body>
-<div class="container">
+  <div class="page">
+    <header class="top">
+      <span class="brand mono">DAILY / {{SEQUENCE_PADDED}}</span>
+      <time class="muted mono" datetime="{{DATE_ISO}}">{{DATE_DISPLAY}} · {{THEME}}</time>
+    </header>
 
-  <!-- ===== 表头（每次必输出） ===== -->
-  <div class="header">
-    <h1>M.DD 英语单词卡片 - [主题名称]主题</h1>
+    <section class="hero">
+      <div class="meta">
+        <span class="kicker mono">SEE → UNDERSTAND → ACT</span>
+        <span class="muted">{{POS_SUMMARY}}</span>
+      </div>
+      <h1>{{HEADLINE}}</h1>
+      <p>{{INTRO}}</p>
+    </section>
+
+    {{OPTIONAL_PREVIOUS_ROUND_REVIEW}}
+
+    <main class="word-grid" aria-label="今日六个英语单词">
+      <article class="card">
+        <div class="card-top"><span class="number mono">WORD_01</span><span class="pos">{{W1_POS}}</span></div>
+        <div class="word-line"><h2 class="word" lang="en">{{W1_WORD}}</h2><span class="phonetic">{{W1_PHONETIC}}</span></div>
+        <p class="meaning">{{W1_MEANING}}</p>
+        <div class="card-body">
+          <div class="example"><p class="example-en" lang="en">{{W1_EXAMPLE_EN_HTML}}</p><p class="example-cn">{{W1_EXAMPLE_CN}}</p></div>
+          <div class="memory"><strong>记忆：</strong>{{W1_MEMORY_HTML}}</div>
+          <div class="usage"><strong>{{W1_USAGE_LABEL}}：</strong>{{W1_USAGE_HTML}}</div>
+        </div>
+        <div class="chips"><span class="chip" lang="en">{{W1_COLLOCATION_1}}</span><span class="chip" lang="en">{{W1_COLLOCATION_2}}</span></div>
+      </article>
+
+      <article class="card">
+        <div class="card-top"><span class="number mono">WORD_02</span><span class="pos">{{W2_POS}}</span></div>
+        <div class="word-line"><h2 class="word" lang="en">{{W2_WORD}}</h2><span class="phonetic">{{W2_PHONETIC}}</span></div>
+        <p class="meaning">{{W2_MEANING}}</p>
+        <div class="card-body">
+          <div class="example"><p class="example-en" lang="en">{{W2_EXAMPLE_EN_HTML}}</p><p class="example-cn">{{W2_EXAMPLE_CN}}</p></div>
+          <div class="memory"><strong>记忆：</strong>{{W2_MEMORY_HTML}}</div>
+          <div class="usage"><strong>{{W2_USAGE_LABEL}}：</strong>{{W2_USAGE_HTML}}</div>
+        </div>
+        <div class="chips"><span class="chip" lang="en">{{W2_COLLOCATION_1}}</span><span class="chip" lang="en">{{W2_COLLOCATION_2}}</span></div>
+      </article>
+
+      <article class="card">
+        <div class="card-top"><span class="number mono">WORD_03</span><span class="pos">{{W3_POS}}</span></div>
+        <div class="word-line"><h2 class="word" lang="en">{{W3_WORD}}</h2><span class="phonetic">{{W3_PHONETIC}}</span></div>
+        <p class="meaning">{{W3_MEANING}}</p>
+        <div class="card-body">
+          <div class="example"><p class="example-en" lang="en">{{W3_EXAMPLE_EN_HTML}}</p><p class="example-cn">{{W3_EXAMPLE_CN}}</p></div>
+          <div class="memory"><strong>记忆：</strong>{{W3_MEMORY_HTML}}</div>
+          <div class="usage"><strong>{{W3_USAGE_LABEL}}：</strong>{{W3_USAGE_HTML}}</div>
+        </div>
+        <div class="chips"><span class="chip" lang="en">{{W3_COLLOCATION_1}}</span><span class="chip" lang="en">{{W3_COLLOCATION_2}}</span></div>
+      </article>
+
+      <article class="card">
+        <div class="card-top"><span class="number mono">WORD_04</span><span class="pos">{{W4_POS}}</span></div>
+        <div class="word-line"><h2 class="word" lang="en">{{W4_WORD}}</h2><span class="phonetic">{{W4_PHONETIC}}</span></div>
+        <p class="meaning">{{W4_MEANING}}</p>
+        <div class="card-body">
+          <div class="example"><p class="example-en" lang="en">{{W4_EXAMPLE_EN_HTML}}</p><p class="example-cn">{{W4_EXAMPLE_CN}}</p></div>
+          <div class="memory"><strong>记忆：</strong>{{W4_MEMORY_HTML}}</div>
+          <div class="usage"><strong>{{W4_USAGE_LABEL}}：</strong>{{W4_USAGE_HTML}}</div>
+        </div>
+        <div class="chips"><span class="chip" lang="en">{{W4_COLLOCATION_1}}</span><span class="chip" lang="en">{{W4_COLLOCATION_2}}</span></div>
+      </article>
+
+      <article class="card">
+        <div class="card-top"><span class="number mono">WORD_05</span><span class="pos">{{W5_POS}}</span></div>
+        <div class="word-line"><h2 class="word" lang="en">{{W5_WORD}}</h2><span class="phonetic">{{W5_PHONETIC}}</span></div>
+        <p class="meaning">{{W5_MEANING}}</p>
+        <div class="card-body">
+          <div class="example"><p class="example-en" lang="en">{{W5_EXAMPLE_EN_HTML}}</p><p class="example-cn">{{W5_EXAMPLE_CN}}</p></div>
+          <div class="memory"><strong>记忆：</strong>{{W5_MEMORY_HTML}}</div>
+          <div class="usage"><strong>{{W5_USAGE_LABEL}}：</strong>{{W5_USAGE_HTML}}</div>
+        </div>
+        <div class="chips"><span class="chip" lang="en">{{W5_COLLOCATION_1}}</span><span class="chip" lang="en">{{W5_COLLOCATION_2}}</span></div>
+      </article>
+
+      <article class="card">
+        <div class="card-top"><span class="number mono">WORD_06</span><span class="pos">{{W6_POS}}</span></div>
+        <div class="word-line"><h2 class="word" lang="en">{{W6_WORD}}</h2><span class="phonetic">{{W6_PHONETIC}}</span></div>
+        <p class="meaning">{{W6_MEANING}}</p>
+        <div class="card-body">
+          <div class="example"><p class="example-en" lang="en">{{W6_EXAMPLE_EN_HTML}}</p><p class="example-cn">{{W6_EXAMPLE_CN}}</p></div>
+          <div class="memory"><strong>记忆：</strong>{{W6_MEMORY_HTML}}</div>
+          <div class="usage"><strong>{{W6_USAGE_LABEL}}：</strong>{{W6_USAGE_HTML}}</div>
+        </div>
+        <div class="chips"><span class="chip" lang="en">{{W6_COLLOCATION_1}}</span><span class="chip" lang="en">{{W6_COLLOCATION_2}}</span></div>
+      </article>
+    </main>
+
+    <section class="after-grid" aria-label="主动回忆与六词汇总">
+      <div class="recall">
+        <span class="label mono">ACTIVE RECALL</span>
+        <div class="recall-list">
+          <details class="question"><summary>1. {{RECALL_Q1}}</summary><p class="answer mono" lang="en">{{RECALL_A1}}</p></details>
+          <details class="question"><summary>2. {{RECALL_Q2}}</summary><p class="answer mono" lang="en">{{RECALL_A2}}</p></details>
+          <details class="question"><summary>3. {{RECALL_Q3}}</summary><p class="answer mono" lang="en">{{RECALL_A3}}</p></details>
+        </div>
+      </div>
+
+      <details class="reference">
+        <summary>六词汇总</summary>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>#</th><th>单词</th><th>核心词义</th><th>核心用法</th></tr></thead>
+            <tbody>
+              <tr><td data-label="#">1</td><td data-label="单词" class="mono">{{W1_WORD}}</td><td data-label="核心词义">{{W1_CORE_MEANING}}</td><td data-label="核心用法" class="mono">{{W1_CORE_USAGE}}</td></tr>
+              <tr><td data-label="#">2</td><td data-label="单词" class="mono">{{W2_WORD}}</td><td data-label="核心词义">{{W2_CORE_MEANING}}</td><td data-label="核心用法" class="mono">{{W2_CORE_USAGE}}</td></tr>
+              <tr><td data-label="#">3</td><td data-label="单词" class="mono">{{W3_WORD}}</td><td data-label="核心词义">{{W3_CORE_MEANING}}</td><td data-label="核心用法" class="mono">{{W3_CORE_USAGE}}</td></tr>
+              <tr><td data-label="#">4</td><td data-label="单词" class="mono">{{W4_WORD}}</td><td data-label="核心词义">{{W4_CORE_MEANING}}</td><td data-label="核心用法" class="mono">{{W4_CORE_USAGE}}</td></tr>
+              <tr><td data-label="#">5</td><td data-label="单词" class="mono">{{W5_WORD}}</td><td data-label="核心词义">{{W5_CORE_MEANING}}</td><td data-label="核心用法" class="mono">{{W5_CORE_USAGE}}</td></tr>
+              <tr><td data-label="#">6</td><td data-label="单词" class="mono">{{W6_WORD}}</td><td data-label="核心词义">{{W6_CORE_MEANING}}</td><td data-label="核心用法" class="mono">{{W6_CORE_USAGE}}</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+    </section>
+
+    <section class="flow">
+      <strong class="mono">LEARNING FLOW</strong>
+      <p>{{LEARNING_FLOW_HTML}}</p>
+    </section>
   </div>
-
-  <!-- ===== 复习页（仅新轮第一天输出，平时删除此区块） ===== -->
-  <!--
-  <div class="review-block">
-    <div class="review-header">📊 Round N-1 · 上轮单词一览 · [起始日期] → [结束日期]</div>
-    <table class="review-table">
-      <thead>
-        <tr><th>执行日</th><th>日期</th><th>单词组</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Day N-4</td><td>MM-DD</td><td>word1 · word2 · word3 · word4 · word5</td></tr>
-        <tr><td>Day N-3</td><td>MM-DD</td><td>word1 · word2 · word3 · word4 · word5</td></tr>
-        <tr><td>Day N-2</td><td>MM-DD</td><td>word1 · word2 · word3 · word4 · word5</td></tr>
-        <tr><td>Day N-1</td><td>MM-DD</td><td>word1 · word2 · word3 · word4 · word5</td></tr>
-        <tr><td>Day N</td><td>MM-DD</td><td>word1 · word2 · word3 · word4 · word5</td></tr>
-      </tbody>
-    </table>
-    <div class="review-footer">💡 本轮共覆盖：[主题名称]。记得先复习上轮，再学新词！</div>
-  </div>
-  -->
-
-  <!-- ===== 单词卡片 1 ===== -->
-  <div class="card">
-    <div class="card-header">
-      <span class="card-number">1.</span>
-      <span class="card-word">word</span>
-      <span class="card-phonetic">/wɜːrd/</span>
-      <span class="card-pos">n.</span>
-    </div>
-    <div class="card-meaning">中文词义</div>
-    <div class="card-example">
-      <div class="card-example-en">This is an example sentence with <strong>word</strong> in it.</div>
-      <div class="card-example-cn">这是一个包含该单词的例句翻译。</div>
-    </div>
-    <div class="card-memory">
-      <span class="label">💡 记忆：</span>词根拆解或联想记忆内容。
-      <div class="collocation">📚 搭配：collocation 1 / collocation 2 / collocation 3</div>
-    </div>
-  </div>
-
-  <!-- ===== 单词卡片 2-5（复制上方结构） ===== -->
-  <!-- ... -->
-
-  <!-- ===== 汇总表格 ===== -->
-  <table class="summary-table">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>单词</th>
-        <th>词义（核心）</th>
-        <th>核心用法</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr><td>1</td><td>word</td><td>中文词义</td><td>核心用法示例</td></tr>
-      <!-- ... 共5行 ... -->
-    </tbody>
-  </table>
-
-  <!-- ===== 底部总结 ===== -->
-  <div class="summary-text">
-    今日 5 个词的主题联系总结，帮助用户形成记忆组块。
-  </div>
-
-</div>
 </body>
 </html>

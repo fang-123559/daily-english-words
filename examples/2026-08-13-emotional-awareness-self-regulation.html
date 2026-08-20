@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>8.13 每日六词 · 情绪识别与自我调节</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --page-bg: light-dark(#f4f5ef, #10110e);
+      --paper: light-dark(#ffffff, #1b1d18);
+      --text: light-dark(#171914, #f2f4ed);
+      --muted: light-dark(#666b5e, #b1b6a8);
+      --border: light-dark(#c6cbbd, #3e4237);
+      --accent: light-dark(#566319, #c6db6b);
+      --accent-soft: light-dark(#e7eccb, #30371a);
+      --note: light-dark(#eceee7, #272a23);
+      --note-text: light-dark(#4d5248, #cbd0c5);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--page-bg);
+      color: var(--text);
+      font-family: "Segoe UI", "Microsoft YaHei", "PingFang SC", sans-serif;
+    }
+
+    strong, h1, h2, summary, th { font-weight: 500; }
+
+    .page {
+      width: min(100%, 78rem);
+      margin: 0 auto;
+      padding: 1.25rem;
+    }
+
+    .mono,
+    .word,
+    .phonetic,
+    .pos,
+    .chip {
+      font-family: "IBM Plex Mono", Consolas, monospace;
+    }
+
+    .top,
+    .meta,
+    .card-top,
+    .word-line,
+    .chips {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .75rem;
+      flex-wrap: wrap;
+    }
+
+    .top {
+      padding: .8rem 0;
+      border-top: 3px solid var(--accent);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .brand,
+    .kicker,
+    .number,
+    .label {
+      font-weight: 500;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+
+    .muted,
+    .phonetic,
+    .example-cn { color: var(--muted); }
+
+    .hero {
+      padding: 1.75rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero h1,
+    .hero p,
+    .card h2,
+    .card p,
+    .recall p { margin: 0; }
+
+    .hero h1 { margin-top: .45rem; }
+
+    .hero p {
+      max-width: 62ch;
+      margin-top: .65rem;
+      color: var(--muted);
+    }
+
+    .kicker,
+    .word,
+    .example-en strong { color: var(--accent); }
+
+    .word-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+      padding-top: 1rem;
+    }
+
+    .card {
+      display: flex;
+      min-width: 0;
+      flex-direction: column;
+      padding: 1rem;
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--accent);
+      border-radius: .45rem;
+      background: var(--paper);
+      overflow-wrap: anywhere;
+    }
+
+    .card-top { align-items: baseline; }
+
+    .word-line {
+      justify-content: flex-start;
+      align-items: baseline;
+      margin-top: .45rem;
+    }
+
+    .pos,
+    .chip {
+      display: inline-flex;
+      padding: .2rem .5rem;
+      border-radius: .3rem;
+      background: var(--accent-soft);
+    }
+
+    .pos { color: var(--accent); }
+
+    .meaning {
+      margin-top: .45rem !important;
+      font-weight: 500;
+    }
+
+    .card-body { flex: 1; }
+
+    .example {
+      margin-top: .85rem;
+      padding-left: .8rem;
+      border-left: 3px solid var(--accent);
+    }
+
+    .example-cn { margin-top: .3rem !important; }
+
+    .memory,
+    .usage {
+      margin-top: .85rem;
+      padding: .75rem;
+      border-radius: .35rem;
+      background: var(--note);
+      color: var(--note-text);
+    }
+
+    .chips {
+      justify-content: flex-start;
+      gap: .45rem;
+      margin-top: .85rem;
+    }
+
+    .after-grid {
+      display: grid;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .recall,
+    .reference,
+    .review {
+      padding: 1rem;
+      border: 1px solid var(--border);
+      border-radius: .45rem;
+      background: var(--paper);
+    }
+
+    .recall-list {
+      display: grid;
+      gap: .7rem;
+      margin-top: .8rem;
+    }
+
+    .question {
+      padding-top: .7rem;
+      border-top: 1px solid var(--border);
+    }
+
+    summary { cursor: pointer; }
+
+    .answer {
+      margin-top: .5rem !important;
+      color: var(--accent);
+    }
+
+    .table-wrap {
+      margin-top: .8rem;
+      border-top: 1px solid var(--border);
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+
+    th, td {
+      padding: .6rem;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+      vertical-align: top;
+      overflow-wrap: anywhere;
+    }
+
+    th { color: var(--muted); }
+    th:first-child, td:first-child { width: 3rem; }
+    th:nth-child(2), td:nth-child(2) { width: 18%; }
+    th:nth-child(3), td:nth-child(3) { width: 24%; }
+    tbody tr:last-child td { border-bottom: 0; }
+
+    .flow {
+      margin-top: 1rem;
+      padding: 1rem;
+      border-left: 3px solid var(--accent);
+      background: var(--paper);
+    }
+
+    .flow p {
+      margin: .45rem 0 0;
+      color: var(--muted);
+    }
+
+    @media (min-width: 841px) {
+      .hero h1 { white-space: nowrap; }
+    }
+
+    @media (max-width: 680px) {
+      .word-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 520px) {
+      .page { padding: .8rem; }
+      .top, .meta { align-items: flex-start; flex-direction: column; }
+      .hero { padding: 1.15rem 0; }
+      .card, .recall, .reference, .review, .flow { padding: .8rem; }
+      .table-wrap { overflow: visible; }
+      table, tbody, tr, td { display: block; width: 100%; }
+      thead { display: none; }
+      tr { padding: .55rem 0; border-bottom: 1px solid var(--border); }
+      tbody tr:last-child { border-bottom: 0; }
+      td, td:first-child, td:nth-child(2), td:nth-child(3) {
+        display: grid;
+        grid-template-columns: 5.5rem minmax(0, 1fr);
+        gap: .5rem;
+        width: 100%;
+        padding: .25rem 0;
+        border-bottom: 0;
+      }
+      td::before {
+        content: attr(data-label);
+        color: var(--muted);
+        font-family: "IBM Plex Mono", Consolas, monospace;
+      }
+      td:first-child { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="top">
+      <span class="brand mono">DAILY / 003</span>
+      <time class="muted mono" datetime="2026-08-13">8.13 · 情绪识别与自我调节</time>
+    </header>
+
+    <section class="hero">
+      <div class="meta">
+        <span class="kicker mono">SEE → UNDERSTAND → ACT</span>
+        <span class="muted">2 adj. · 2 n. · 2 v.</span>
+      </div>
+      <h1>先察觉，再调节情绪</h1>
+      <p>从身体和情绪信号出发，找到触发因素，重新找回平衡，再用更有意识的方式回应。</p>
+    </section>
+
+    <main class="word-grid" aria-label="今日六个英语单词">
+      <article class="card">
+        <div class="card-top"><span class="number mono">WORD_01</span><span class="pos">adj.</span></div>
+        <div class="word-line"><h2 class="word" lang="en">overwhelmed</h2><span class="phonetic">/ˌəʊvəˈwelmd/</span></div>
+        <p class="meaning">不堪重负的；应接不暇的</p>
+        <div class="card-body">
+          <div class="example"><p class="example-en" lang="en">I felt <strong>overwhelmed</strong> by the sudden changes.</p><p class="example-cn">突然的变化让我感到应接不暇。</p></div>
+          <div class="memory"><strong>记忆：</strong><strong>over-</strong> 表示“过度”，<strong>whelm</strong> 有“淹没、压倒”的意思；想象情绪水位越过头顶。</div>
+          <div class="usage"><strong>使用辨析／使用提示：</strong>常用 <strong>be overwhelmed by/with</strong>；既可表示压力过大，也可表示被强烈的感激或喜悦包围。</div>
+        </div>
+        <div class="chips"><span class="chip" lang="en">feel overwhelmed</span><span class="chip" lang="en">overwhelmed by work</span></div>
+      </article>
+
+      <article class="card">
+        <div class="card-top"><span class="number mono">WORD_02</span><span class="pos">adj.</span></div>
+        <div class="word-line"><h2 class="word" lang="en">restless</h2><span class="phonetic">/ˈrestləs/</span></div>
+        <p class="meaning">坐立不安的；难以安静的</p>
+        <div class="card-body">
+          <div class="example"><p class="example-en" lang="en">A restless night made it hard to focus.</p><p class="example-cn">一夜难眠让我很难集中注意力。</p></div>
+          <div class="memory"><strong>记忆：</strong><strong>rest</strong> 是“休息”，<strong>-less</strong> 表示“没有”；<strong>restless</strong> 就是“没有安稳休息”。</div>
+          <div class="usage"><strong>使用辨析／使用提示：</strong>强调人、思绪或睡眠无法安定；比 <strong>anxious</strong> 更突出“静不下来”，不一定包含明确的担忧。</div>
+        </div>
+        <div class="chips"><span class="chip" lang="en">restless mind</span><span class="chip" lang="en">restless night</span></div>
+      </article>
+
+      <article class="card">
+        <div class="card-top"><span class="number mono">WORD_03</span><span class="pos">n.</span></div>
+        <div class="word-line"><h2 class="word" lang="en">trigger</h2><span class="phonetic">/ˈtrɪɡə(r)/</span></div>
+        <p class="meaning">触发因素；诱因</p>
+        <div class="card-body">
+          <div class="example"><p class="example-en" lang="en">Loud notifications are a common stress <strong>trigger</strong>.</p><p class="example-cn">刺耳的通知声是常见的压力诱因。</p></div>
+          <div class="memory"><strong>记忆：</strong>联想枪械的 <strong>trigger</strong>：扣下它会启动一连串反应；生活中的 trigger 也会“触发”情绪或行为。</div>
+          <div class="usage"><strong>使用辨析／使用提示：</strong>名词常用 <strong>a trigger for sth</strong>；动词 <strong>trigger a reaction</strong> 表示“引发反应”，语气可以是中性的。</div>
+        </div>
+        <div class="chips"><span class="chip" lang="en">emotional trigger</span><span class="chip" lang="en">trigger a response</span></div>
+      </article>
+
+      <article class="card">
+        <div class="card-top"><span class="number mono">WORD_04</span><span class="pos">n.</span></div>
+        <div class="word-line"><h2 class="word" lang="en">balance</h2><span class="phonetic">/ˈbæləns/</span></div>
+        <p class="meaning">平衡；均衡状态</p>
+        <div class="card-body">
+          <div class="example"><p class="example-en" lang="en">A short walk helped me regain my <strong>balance</strong>.</p><p class="example-cn">短暂散步帮我重新找回了平衡。</p></div>
+          <div class="memory"><strong>记忆：</strong>想象天平两端重量相等：<strong>balance</strong> 的核心就是“保持均衡”，也可指情绪或生活状态的稳定。</div>
+          <div class="usage"><strong>使用辨析／使用提示：</strong>常用 <strong>balance between A and B</strong>；<strong>regain/maintain balance</strong> 分别表示“恢复／保持平衡”。</div>
+        </div>
+        <div class="chips"><span class="chip" lang="en">emotional balance</span><span class="chip" lang="en">work-life balance</span></div>
+      </article>
+
+      <article class="card">
+        <div class="card-top"><span class="number mono">WORD_05</span><span class="pos">v.</span></div>
+        <div class="word-line"><h2 class="word" lang="en">notice</h2><span class="phonetic">/ˈnəʊtɪs/</span></div>
+        <p class="meaning">注意到；察觉</p>
+        <div class="card-body">
+          <div class="example"><p class="example-en" lang="en"><strong>Notice</strong> your breathing before you answer.</p><p class="example-cn">回答之前，先注意自己的呼吸。</p></div>
+          <div class="memory"><strong>记忆：</strong>联想在心里做一条 <strong>note</strong>（记录）：先“注意到”变化，才有机会理解和调整。</div>
+          <div class="usage"><strong>使用辨析／使用提示：</strong>可接名词、动名词或 <strong>that</strong> 从句：<strong>notice a change / notice feeling tense / notice that...</strong>；不说 <strong>notice to do</strong>。</div>
+        </div>
+        <div class="chips"><span class="chip" lang="en">notice a pattern</span><span class="chip" lang="en">notice a change</span></div>
+      </article>
+
+      <article class="card">
+        <div class="card-top"><span class="number mono">WORD_06</span><span class="pos">v.</span></div>
+        <div class="word-line"><h2 class="word" lang="en">regulate</h2><span class="phonetic">/ˈreɡjʊleɪt/</span></div>
+        <p class="meaning">调节；控制</p>
+        <div class="card-body">
+          <div class="example"><p class="example-en" lang="en">Pause and breathe to <strong>regulate</strong> your response.</p><p class="example-cn">停下来做呼吸练习，以调节自己的反应。</p></div>
+          <div class="memory"><strong>记忆：</strong>与 <strong>regular</strong>（规律的）同源，来自拉丁语 <strong>regula</strong>“规则、直尺”；<strong>regulate</strong> 就是让状态回到可控的规律。</div>
+          <div class="usage"><strong>使用辨析／使用提示：</strong>可用于情绪、呼吸、温度或行为；调节不等于压抑，而是把反应强度带回合适范围。</div>
+        </div>
+        <div class="chips"><span class="chip" lang="en">regulate emotions</span><span class="chip" lang="en">regulate breathing</span></div>
+      </article>
+    </main>
+
+    <section class="after-grid" aria-label="主动回忆与六词汇总">
+      <div class="recall">
+        <span class="label mono">ACTIVE RECALL</span>
+        <div class="recall-list">
+          <details class="question"><summary>1. Which adjective describes being unable to settle?</summary><p class="answer mono" lang="en">restless</p></details>
+          <details class="question"><summary>2. What noun names something that sets off a reaction?</summary><p class="answer mono" lang="en">trigger</p></details>
+          <details class="question"><summary>3. Which verb means to adjust a response rather than suppress it?</summary><p class="answer mono" lang="en">regulate</p></details>
+        </div>
+      </div>
+
+      <details class="reference">
+        <summary>六词汇总</summary>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>#</th><th>单词</th><th>核心词义</th><th>核心用法</th></tr></thead>
+            <tbody>
+              <tr><td data-label="#">1</td><td data-label="单词" class="mono">overwhelmed</td><td data-label="核心词义">不堪重负的；应接不暇的</td><td data-label="核心用法" class="mono">be overwhelmed by/with sth</td></tr>
+              <tr><td data-label="#">2</td><td data-label="单词" class="mono">restless</td><td data-label="核心词义">坐立不安的；难以安静的</td><td data-label="核心用法" class="mono">a restless mind/night</td></tr>
+              <tr><td data-label="#">3</td><td data-label="单词" class="mono">trigger</td><td data-label="核心词义">触发因素；诱因</td><td data-label="核心用法" class="mono">a trigger for stress</td></tr>
+              <tr><td data-label="#">4</td><td data-label="单词" class="mono">balance</td><td data-label="核心词义">平衡；均衡状态</td><td data-label="核心用法" class="mono">regain/maintain balance</td></tr>
+              <tr><td data-label="#">5</td><td data-label="单词" class="mono">notice</td><td data-label="核心词义">注意到；察觉</td><td data-label="核心用法" class="mono">notice that... / notice sth</td></tr>
+              <tr><td data-label="#">6</td><td data-label="单词" class="mono">regulate</td><td data-label="核心词义">调节；控制</td><td data-label="核心用法" class="mono">regulate emotions/breathing</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+    </section>
+
+    <section class="flow">
+      <strong class="mono">LEARNING FLOW</strong>
+      <p>先用 <strong>notice</strong> 觉察自己是否 <strong>overwhelmed</strong> 或 <strong>restless</strong>，再找到 <strong>trigger</strong>，重新寻找 <strong>balance</strong>，最后用停顿和呼吸来 <strong>regulate</strong> 反应。</p>
+    </section>
+  </div>
+</body>
+</html>
