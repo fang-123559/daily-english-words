@@ -1,29 +1,33 @@
 # 每日英语单词 Daily English Words 📚
 
-一个**开箱即用的 Skill 模板**：默认让 AI 每天推荐 6 个主题连贯的实用英语单词，输出**结构化单词卡片 + 汇总表格 + 精美 HTML 卡片文件**，并自动去重、按轮次复习、记录词库。
+一个面向 AI Agent 的**主题英语单词学习 Skill**。默认每次推荐 **6 个主题连贯的实用单词**，生成含音标、词义、例句和常用搭配的学习卡片，同时输出汇总表和 HTML 文件。`word-bank.md` 记录已学单词和复习轮次。
 
-> 默认每天 6 个词 · 主题连贯 · 越学越顺
+> 每次 6 词 · 同一主题 · 可视化卡片
+
+[六词 HTML 示例](examples/2026-08-13-emotional-awareness-self-regulation.html) · [默认六词模板](templates/word-card-template.html) · [执行规则](SKILL.md)
+
+在支持加载 Skill 和读写项目文件的 Agent 中可按需触发。若要每天运行，需在使用的平台配置定时任务。
 
 ---
 
 ## ✨ 特性
 
-- 📚 **每日 6 词**：默认推荐 6 个主题连贯的实用单词（生活 + 职场双场景）
+- 📚 **每次默认 6 词**：选择同一主题的实用英语单词，覆盖生活和职场用法
 - 🎴 **结构化卡片**：单词 / 音标 / 词性 / 词义 / 例句 / 记忆提示 / 常用搭配，一应俱全
 - 📄 **HTML 卡片文件**：自动生成精美 HTML，可直接分享或用于小红书等平台
 - 🎨 **9 种卡片风格可选**：`templates/styles/` 内置手账海报、深色词典、大字报、日系极简、索引卡、打字机档案、松林阅读等多套模板，见下方「🎨 卡片风格」
 - 🔄 **轮次复习机制**：每轮结束自动生成「上轮单词一览」复习页，温故知新
-- 🛡️ **自动去重**：基于 `word-bank.md` 词库汇总表，绝不重复推荐
+- 🛡️ **历史去重**：按 `word-bank.md` 避开已学单词。首次运行会初始化词库，格式损坏时先备份再修复。
 - 🛡️ **工程化设计**：内置失败模式编码、异常处理表、反例黑名单（详见 SKILL.md）
 - ⚙️ **可接入自动化**：可配置为每日定时任务自动执行
 - 🧩 **两类模板**：默认使用六词模板，`templates/styles/` 下提供五词模板
 
 ## 🖼️ 效果预览
 
-**6.25 跨文化沟通主题**（diverse / inclusive / cultural / global / multilingual）：
+**历史五词模板截图（6 月 25 日，跨文化沟通）**：diverse / inclusive / cultural / global / multilingual
 
 <p align="center">
-  <img src="examples/2026-06-25-cross-cultural-communication.png" width="380"/>
+  <a href="examples/2026-06-25-cross-cultural-communication.html"><img src="examples/2026-06-25-cross-cultural-communication.png" width="380" alt="跨文化沟通主题的历史五词卡片截图"/></a>
 </p>
 
 > 📄 完整 HTML 示例见 [examples/](examples/)：
